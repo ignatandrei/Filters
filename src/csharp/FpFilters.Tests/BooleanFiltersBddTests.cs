@@ -65,5 +65,35 @@ namespace FpFilters.BooleanFilters.BddTests
                 _ => ThenResultShouldBeFalse()
             );
         }
+
+        [Scenario]
+        public void Should_check_various_types_for_truthy_and_falsey()
+        {
+            Xunit.Assert.False(FpFilters.BooleanFilters.BooleanFilters.IsTruthy(null));
+            Xunit.Assert.False(FpFilters.BooleanFilters.BooleanFilters.IsTruthy(""));
+            Xunit.Assert.True(FpFilters.BooleanFilters.BooleanFilters.IsTruthy("abc"));
+            Xunit.Assert.False(FpFilters.BooleanFilters.BooleanFilters.IsTruthy(0));
+            Xunit.Assert.True(FpFilters.BooleanFilters.BooleanFilters.IsTruthy(42));
+            Xunit.Assert.False(FpFilters.BooleanFilters.BooleanFilters.IsTruthy(0.0));
+            Xunit.Assert.True(FpFilters.BooleanFilters.BooleanFilters.IsTruthy(3.14));
+            Xunit.Assert.False(FpFilters.BooleanFilters.BooleanFilters.IsTruthy(new int[] {}));
+            Xunit.Assert.True(FpFilters.BooleanFilters.BooleanFilters.IsTruthy(new int[] { 1 }));
+            Xunit.Assert.False(FpFilters.BooleanFilters.BooleanFilters.IsTruthy(new System.Collections.Generic.List<int>()));
+            Xunit.Assert.True(FpFilters.BooleanFilters.BooleanFilters.IsTruthy(new System.Collections.Generic.List<int> { 1 }));
+            Xunit.Assert.True(FpFilters.BooleanFilters.BooleanFilters.IsTruthy(new object()));
+
+            Xunit.Assert.True(FpFilters.BooleanFilters.BooleanFilters.IsFalsey(null));
+            Xunit.Assert.True(FpFilters.BooleanFilters.BooleanFilters.IsFalsey(""));
+            Xunit.Assert.False(FpFilters.BooleanFilters.BooleanFilters.IsFalsey("abc"));
+            Xunit.Assert.True(FpFilters.BooleanFilters.BooleanFilters.IsFalsey(0));
+            Xunit.Assert.False(FpFilters.BooleanFilters.BooleanFilters.IsFalsey(42));
+            Xunit.Assert.True(FpFilters.BooleanFilters.BooleanFilters.IsFalsey(0.0));
+            Xunit.Assert.False(FpFilters.BooleanFilters.BooleanFilters.IsFalsey(3.14));
+            Xunit.Assert.True(FpFilters.BooleanFilters.BooleanFilters.IsFalsey(new int[] {}));
+            Xunit.Assert.False(FpFilters.BooleanFilters.BooleanFilters.IsFalsey(new int[] { 1 }));
+            Xunit.Assert.True(FpFilters.BooleanFilters.BooleanFilters.IsFalsey(new System.Collections.Generic.List<int>()));
+            Xunit.Assert.False(FpFilters.BooleanFilters.BooleanFilters.IsFalsey(new System.Collections.Generic.List<int> { 1 }));
+            Xunit.Assert.False(FpFilters.BooleanFilters.BooleanFilters.IsFalsey(new object()));
+        }
     }
 }
