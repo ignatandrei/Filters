@@ -1,9 +1,3 @@
-using LightBDD.Framework;
-using LightBDD.Framework.Scenarios;
-using LightBDD.XUnit2;
-using System;
-using System.Linq;
-
 namespace FpFilters.ArrayFilters.BddTests
 {
     [FeatureDescription(

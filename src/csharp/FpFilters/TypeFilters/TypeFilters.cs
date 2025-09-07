@@ -1,5 +1,3 @@
-using System;
-
 namespace FpFilters.TypeFilters
 {
     public static class TypeFilters

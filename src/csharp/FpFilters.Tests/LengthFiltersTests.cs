@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using Xunit;
-
 namespace FpFilters.LengthFilters.Tests
 {
     public class LengthFiltersTests

@@ -1,5 +1,3 @@
-using Xunit;
-
 namespace FpFilters.PositionFilters.Tests
 {
     public class PositionFiltersTests

@@ -1,8 +1,3 @@
-using LightBDD.Framework;
-using LightBDD.Framework.Scenarios;
-using LightBDD.XUnit2;
-using System;
-
 namespace FpFilters.TypeFilters.BddTests
 {
     [FeatureDescription("TypeFilters: BDD scenarios for type filter functions.")]

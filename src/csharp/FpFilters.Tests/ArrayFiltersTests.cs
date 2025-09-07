@@ -1,7 +1,3 @@
-using Xunit;
-using System;
-using System.Linq;
-
 namespace FpFilters.ArrayFilters.Tests
 {
     public class ArrayFiltersTests

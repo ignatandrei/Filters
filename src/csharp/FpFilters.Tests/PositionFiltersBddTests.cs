@@ -1,8 +1,3 @@
-using LightBDD.Framework;
-using LightBDD.Framework.Scenarios;
-using LightBDD.XUnit2;
-using System;
-
 namespace FpFilters.PositionFilters.BddTests
 {
     [FeatureDescription("PositionFilters: BDD scenarios for position filter functions.")]

@@ -1,8 +1,3 @@
-using LightBDD.Framework;
-using LightBDD.Framework.Scenarios;
-using LightBDD.XUnit2;
-using System;
-
 namespace FpFilters.DateFilters.BddTests
 {
     [FeatureDescription("DateFilters: BDD scenarios for date filter functions.")]

@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Reflection;
-
 namespace FpFilters.ObjectFilters
 {
     public static class ObjectFilters

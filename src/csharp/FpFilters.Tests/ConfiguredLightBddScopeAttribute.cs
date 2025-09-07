@@ -1,7 +1,3 @@
-using LightBDD.Core.Configuration;
-using LightBDD.Framework.Configuration;
-using LightBDD.Framework.Reporting.Formatters;
-using LightBDD.XUnit2;
 
 [assembly: ConfiguredLightBddScope]
 internal class ConfiguredLightBddScopeAttribute : LightBddScopeAttribute

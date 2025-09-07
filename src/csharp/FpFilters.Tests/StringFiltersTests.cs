@@ -1,5 +1,3 @@
-using Xunit;
-
 namespace FpFilters.StringFilters.Tests
 {
     public class StringFiltersTests

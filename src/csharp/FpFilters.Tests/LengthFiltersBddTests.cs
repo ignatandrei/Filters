@@ -1,8 +1,3 @@
-using LightBDD.Framework;
-using LightBDD.Framework.Scenarios;
-using LightBDD.XUnit2;
-using System;
-
 namespace FpFilters.LengthFilters.BddTests
 {
     [FeatureDescription("LengthFilters: BDD scenarios for length filter functions.")]

@@ -1,6 +1,3 @@
-using System;
-using System.Linq;
-
 namespace FpFilters.ArrayFilters
 {
     public static class ArrayFilters

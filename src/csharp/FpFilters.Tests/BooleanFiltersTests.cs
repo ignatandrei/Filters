@@ -1,6 +1,3 @@
-using Xunit;
-using System.Collections.Generic;
-
 namespace FpFilters.BooleanFilters.Tests
 {
     public class BooleanFiltersTests

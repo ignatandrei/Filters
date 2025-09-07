@@ -1,8 +1,3 @@
-using LightBDD.Framework;
-using LightBDD.Framework.Scenarios;
-using LightBDD.XUnit2;
-using System;
-
 namespace FpFilters.BooleanFilters.BddTests
 {
     [FeatureDescription("BooleanFilters: BDD scenarios for boolean filter functions.")]

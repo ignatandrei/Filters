@@ -1,5 +1,3 @@
-using Xunit;
-
 namespace FpFilters.NumberFilters.Tests
 {
     public class NumberFiltersTests

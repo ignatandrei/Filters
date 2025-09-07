@@ -1,7 +1,3 @@
-using LightBDD.Framework;
-using LightBDD.Framework.Scenarios;
-using LightBDD.XUnit2;
-
 namespace FpFilters.NumberFilters.BddTests
 {
 	[FeatureDescription("NumberFilters: BDD scenarios for number filter functions.")]

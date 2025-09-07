@@ -1,5 +1,3 @@
-using System;
-
 namespace FpFilters.DateFilters
 {
     public static class DateFilters

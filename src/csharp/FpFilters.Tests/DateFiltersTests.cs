@@ -1,6 +1,3 @@
-using System;
-using Xunit;
-
 namespace FpFilters.DateFilters.Tests
 {
     public class DateFiltersTests
