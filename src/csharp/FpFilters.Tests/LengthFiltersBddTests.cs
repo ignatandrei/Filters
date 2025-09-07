@@ -122,5 +122,30 @@ namespace FpFilters.LengthFilters.BddTests
             Xunit.Assert.True(FpFilters.LengthFilters.LengthFilters.HasLengthMax(custom, 5));
             Xunit.Assert.True(FpFilters.LengthFilters.LengthFilters.HasLengthBetween(custom, 5, 5));
         }
+
+        [Scenario]
+        public void Should_check_null_and_missing_length_property_cases()
+        {
+            object nullObj = null;
+            object noLength = new { Value = 42 };
+            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.HasLength(nullObj, 1));
+            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.HasLengthMin(nullObj, 1));
+            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.HasLengthMax(nullObj, 1));
+            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.HasLengthBetween(nullObj, 1, 2));
+            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.HasLength(noLength, 1));
+            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.HasLengthMin(noLength, 1));
+            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.HasLengthMax(noLength, 1));
+            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.HasLengthBetween(noLength, 1, 2));
+        }
+
+        [Scenario]
+        public void Should_check_length_methods_with_null_string()
+        {
+            string? nullStr = null;
+            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.IsLengthEqualTo(nullStr, 0));
+            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.IsLengthGreaterThan(nullStr, 0));
+            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.IsLengthLessThan(nullStr, 0));
+            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.IsLengthZero(nullStr));
+        }
     }
 }
