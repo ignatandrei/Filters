@@ -147,5 +147,52 @@ namespace FpFilters.LengthFilters.BddTests
             Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.IsLengthLessThan(nullStr, 0));
             Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.IsLengthZero(nullStr));
         }
+
+        [Scenario]
+        public void Should_check_objects_with_length_property_via_reflection()
+        {
+            // Test reflection paths that were not covered
+            var customEmptyLength = new { Length = 0 };
+            var customNonZeroLength = new { Length = 3 };
+            var objectWithoutLength = new { Name = "test" };
+            
+            // Test IsEmpty with reflection path
+            Xunit.Assert.True(FpFilters.LengthFilters.LengthFilters.IsEmpty(customEmptyLength));
+            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.IsEmpty(customNonZeroLength));
+            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.IsEmpty(objectWithoutLength));
+            
+            // Test HasLength with reflection path
+            Xunit.Assert.True(FpFilters.LengthFilters.LengthFilters.HasLength(customNonZeroLength, 3));
+            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.HasLength(customNonZeroLength, 2));
+            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.HasLength(objectWithoutLength, 1));
+            
+            // Test HasLengthMin with reflection path
+            Xunit.Assert.True(FpFilters.LengthFilters.LengthFilters.HasLengthMin(customNonZeroLength, 2));
+            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.HasLengthMin(customNonZeroLength, 4));
+            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.HasLengthMin(objectWithoutLength, 1));
+            
+            // Test HasLengthMax with reflection path
+            Xunit.Assert.True(FpFilters.LengthFilters.LengthFilters.HasLengthMax(customNonZeroLength, 4));
+            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.HasLengthMax(customNonZeroLength, 2));
+            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.HasLengthMax(objectWithoutLength, 5));
+        }
+
+        [Scenario]
+        public void Should_check_has_length_max_with_icollection_types()
+        {
+            // Test the ICollection path for HasLengthMax that wasn't covered
+            var list = new System.Collections.Generic.List<int> { 1, 2, 3 };
+            var array = new int[] { 1, 2, 3, 4 };
+            
+            // Test HasLengthMax with ICollection (List)
+            Xunit.Assert.True(FpFilters.LengthFilters.LengthFilters.HasLengthMax(list, 3));
+            Xunit.Assert.True(FpFilters.LengthFilters.LengthFilters.HasLengthMax(list, 5));
+            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.HasLengthMax(list, 2));
+            
+            // Test HasLengthMax with ICollection (Array)
+            Xunit.Assert.True(FpFilters.LengthFilters.LengthFilters.HasLengthMax(array, 4));
+            Xunit.Assert.True(FpFilters.LengthFilters.LengthFilters.HasLengthMax(array, 6));
+            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.HasLengthMax(array, 3));
+        }
     }
 }
