@@ -101,5 +101,41 @@ namespace FpFilters.StringFilters.Tests
             Assert.True(StringFilters.IsEmail("test@example.com"));
             Assert.False(StringFilters.IsEmail("not-an-email"));
         }
+
+        [Fact]
+        public void AllMethods_HandleNullInput()
+        {
+            Assert.False(StringFilters.StartsWith(null, "x"));
+            Assert.False(StringFilters.EndsWith(null, "x"));
+            Assert.False(StringFilters.Includes(null, "x"));
+            Assert.False(StringFilters.IsEmptyString(null));
+            Assert.False(StringFilters.IsEmptyStringTrim(null));
+            Assert.False(StringFilters.IsLowerCase(null));
+            Assert.False(StringFilters.IsUpperCase(null));
+            Assert.False(StringFilters.IsMixedCase(null));
+            Assert.False(StringFilters.IsUniformCase(null));
+            Assert.False(StringFilters.IsTrimmable(null));
+            Assert.False(StringFilters.IsTrimmableStart(null));
+            Assert.False(StringFilters.IsTrimmableEnd(null));
+            Assert.False(StringFilters.IsPalindrome(null));
+            Assert.False(StringFilters.Matches(null, "x"));
+            Assert.True(StringFilters.DoesNotMatch(null, "x"));
+            Assert.False(StringFilters.IsEmail(null));
+        }
+
+        [Fact]
+        public void IsTrimmableStartAndEnd_Tests()
+        {
+            Assert.True(StringFilters.IsTrimmableStart(" abc"));
+            Assert.False(StringFilters.IsTrimmableStart("abc "));
+            Assert.False(StringFilters.IsTrimmableStart("abc"));
+            Assert.True(StringFilters.IsTrimmableEnd("abc "));
+            Assert.False(StringFilters.IsTrimmableEnd(" abc"));
+            Assert.False(StringFilters.IsTrimmableEnd("abc"));
+            Assert.False(StringFilters.IsTrimmableStart(""));
+            Assert.False(StringFilters.IsTrimmableEnd(""));
+            Assert.True(StringFilters.IsTrimmableStart("   "));
+            Assert.True(StringFilters.IsTrimmableEnd("   "));
+        }
     }
 }

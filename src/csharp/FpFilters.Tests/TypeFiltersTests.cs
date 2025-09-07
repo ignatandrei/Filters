@@ -60,6 +60,57 @@ namespace FpFilters.TypeFilters.Tests
             Assert.False(TypeFilters.IsArray("array"));
         }
 
+        [Fact]
+        public void IsNotMethods_Coverage()
+        {
+            Assert.False(TypeFilters.IsNotUndefined(null));
+            Assert.True(TypeFilters.IsNotUndefined("abc"));
+            Assert.False(TypeFilters.IsNotString("abc"));
+            Assert.True(TypeFilters.IsNotString(123));
+            Assert.False(TypeFilters.IsNotNumber(123));
+            Assert.True(TypeFilters.IsNotNumber("abc"));
+            Assert.False(TypeFilters.IsNotObject(new object()));
+            Assert.True(TypeFilters.IsNotObject(123));
+            Assert.True(TypeFilters.IsNotNull("abc"));
+            Assert.False(TypeFilters.IsNotNull(null));
+            Assert.False(TypeFilters.IsNotBoolean(true));
+            Assert.True(TypeFilters.IsNotBoolean("abc"));
+            Assert.False(TypeFilters.IsNotDate(System.DateTime.Now));
+            Assert.True(TypeFilters.IsNotDate("abc"));
+            Assert.False(TypeFilters.IsNotArray(new int[] { 1 }));
+            Assert.True(TypeFilters.IsNotArray("abc"));
+        }
+
+        [Fact]
+        public void IsSameTypeAs_And_NotSameTypeAs_Coverage()
+        {
+            Assert.True(TypeFilters.IsSameTypeAs("abc", "def"));
+            Assert.False(TypeFilters.IsSameTypeAs("abc", 123));
+            Assert.True(TypeFilters.IsNotSameTypeAs("abc", 123));
+            Assert.False(TypeFilters.IsNotSameTypeAs("abc", "def"));
+            Assert.False(TypeFilters.IsSameTypeAs(null, "def"));
+            Assert.True(TypeFilters.IsNotSameTypeAs(null, "def"));
+        }
+
+        [Fact]
+        public void IsOfType_And_IsNotOfType_Coverage()
+        {
+            Assert.True(TypeFilters.IsOfType("abc", typeof(string)));
+            Assert.False(TypeFilters.IsOfType(123, typeof(string)));
+            Assert.False(TypeFilters.IsOfType(null, typeof(string)));
+            Assert.False(TypeFilters.IsNotOfType("abc", typeof(string)));
+            Assert.True(TypeFilters.IsNotOfType(123, typeof(string)));
+            Assert.True(TypeFilters.IsNotOfType(null, typeof(string)));
+        }
+
+        [Fact]
+        public void IsInstanceOf_Coverage()
+        {
+            Assert.True(TypeFilters.IsInstanceOf<string>("abc"));
+            Assert.False(TypeFilters.IsInstanceOf<int>("abc"));
+            Assert.False(TypeFilters.IsInstanceOf<string>(null));
+        }
+
         // Additional tests for Not* and SameTypeAs, etc. can be added similarly
     }
 }
