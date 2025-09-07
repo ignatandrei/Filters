@@ -13,5 +13,18 @@ namespace FpFilters.MiscFilters
 
         // Returns false for all elements
         public static bool None() => false;
+        // BDD test support methods
+        // Only treat reference types (classes) as 'null or default'. Value types are never null/default unless explicitly null.
+        public static bool IsNullOrDefault<T>(T arg)
+            where T : class
+        {
+            return arg == null;
+        }
+
+        public static bool IsNotNullOrDefault<T>(T arg)
+            where T : class
+        {
+            return arg != null;
+        }
     }
 }

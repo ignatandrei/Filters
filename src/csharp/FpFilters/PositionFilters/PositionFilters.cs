@@ -13,5 +13,9 @@ namespace FpFilters.PositionFilters
         {
             return (index - start) % n == 0;
         }
+        // BDD test support methods
+        public static bool IsFirst(int index) => index == 0;
+        public static bool IsLast(int index, int length) => index == length - 1;
+        public static bool IsMiddle(int index, int length) => length > 2 && index > 0 && index < length - 1;
     }
 }

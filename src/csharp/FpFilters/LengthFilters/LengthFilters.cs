@@ -56,5 +56,10 @@ namespace FpFilters.LengthFilters
         public static bool HasNotLengthMin(object arg, int min) => !HasLengthMin(arg, min);
         public static bool HasNotLengthMax(object arg, int max) => !HasLengthMax(arg, max);
         public static bool HasNotLengthBetween(object arg, int min, int max) => !HasLengthBetween(arg, min, max);
+        // BDD test support methods
+        public static bool IsLengthEqualTo(string? arg, int comparison) => arg != null && arg.Length == comparison;
+        public static bool IsLengthGreaterThan(string? arg, int comparison) => arg != null && arg.Length > comparison;
+        public static bool IsLengthLessThan(string? arg, int comparison) => arg != null && arg.Length < comparison;
+        public static bool IsLengthZero(string? arg) => arg != null && arg.Length == 0;
     }
 }

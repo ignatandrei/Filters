@@ -56,5 +56,12 @@ namespace FpFilters.ObjectFilters
         public static bool HasNotProps(object obj, string[] propertyNames, object?[]? values = null) => !HasProps(obj, propertyNames, values);
         public static bool HasNotSameProp(object obj, object comparisonObject, string propertyName) => !HasSameProp(obj, comparisonObject, propertyName);
         public static bool HasNotSameProps(object obj, object comparisonObject, string[] propertyNames) => !HasSameProps(obj, comparisonObject, propertyNames);
+        // BDD test support methods
+        public static bool IsNull(object? obj) => obj == null;
+        public static bool IsNotNull(object? obj) => obj != null;
+        public static bool IsEqualTo(object? obj, object? comparison) => Equals(obj, comparison);
+        public static bool IsNotEqualTo(object? obj, object? comparison) => !Equals(obj, comparison);
+        public static bool IsReferenceEqual(object? obj, object? comparison) => ReferenceEquals(obj, comparison);
+        public static bool IsReferenceNotEqual(object? obj, object? comparison) => !ReferenceEquals(obj, comparison);
     }
 }
