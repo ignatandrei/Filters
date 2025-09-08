@@ -21,7 +21,10 @@ jobs:
         run: dotnet tool install --global dotnet-reportgenerator-globaltool
       - name: Run tests with coverage
         shell: pwsh
-        run: src/csharp/run-tests-with-coverage.ps1
+        run: |
+          cd src
+          cd csharp
+          ./run-tests-with-coverage.ps1
       - name: Upload coverage report
         uses: actions/upload-artifact@v4
         with:
