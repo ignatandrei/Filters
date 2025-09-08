@@ -6,7 +6,7 @@ $coverageFile = Get-ChildItem -Path FpFilters.Tests/TestResults -Recurse -Filter
 
 if ($coverageFile) {
     # Generate HTML report
-    reportgenerator -reports:$coverageFile.FullName -targetdir:src/csharp/FpFilters.Tests/TestResults/CoverageReport -reporttypes:Html
+    reportgenerator -reports:$coverageFile.FullName -targetdir:FpFilters.Tests/TestResults/CoverageReport -reporttypes:Html
     Write-Host "Coverage report generated at src/csharp/FpFilters.Tests/TestResults/CoverageReport/index.html"
 
     # Parse coverage percentage from cobertura XML
