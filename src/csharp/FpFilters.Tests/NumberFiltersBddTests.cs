@@ -25,6 +25,15 @@ namespace FpFilters.NumberFilters.BddTests
 		private void WhenIsNaN() => result = double.IsNaN(arg);
 		private void ThenResultShouldBeTrue() => Xunit.Assert.True(result);
 		private void ThenResultShouldBeFalse() => Xunit.Assert.False(result);
+		private void WhenIsMultipleOfLinq() => result = FpFilters.NumberFilters.NumberFilters.IsMultipleOf(3)(intArg);
+		private void WhenIsLowerThanLinq() => result = FpFilters.NumberFilters.NumberFilters.IsLowerThan(comparison)(arg);
+		private void WhenIsLowerOrEqualToLinq() => result = FpFilters.NumberFilters.NumberFilters.IsLowerOrEqualTo(comparison)(arg);
+		private void WhenIsGreaterThanLinq() => result = FpFilters.NumberFilters.NumberFilters.IsGreaterThan(comparison)(arg);
+		private void WhenIsGreaterOrEqualToLinq() => result = FpFilters.NumberFilters.NumberFilters.IsGreaterOrEqualTo(comparison)(arg);
+		private void WhenIsBetweenExcludingMinLinq(double min, double max) => result = FpFilters.NumberFilters.NumberFilters.IsBetweenExcludingMin(min, max)(arg);
+		private void WhenIsBetweenExcludingMaxLinq(double min, double max) => result = FpFilters.NumberFilters.NumberFilters.IsBetweenExcludingMax(min, max)(arg);
+		private void WhenIsBetweenExcludingBoundariesLinq(double min, double max) => result = FpFilters.NumberFilters.NumberFilters.IsBetweenExcludingBoundaries(min, max)(arg);
+		private void WhenIsBetweenLinq(double min, double max) => result = FpFilters.NumberFilters.NumberFilters.IsBetween(min, max)(arg);
 
 		[Scenario]
 		public void Should_check_if_number_is_even()
@@ -186,6 +195,137 @@ namespace FpFilters.NumberFilters.BddTests
 				_ => ThenResultShouldBeTrue(),
 				_ => GivenNumber(3),
 				_ => WhenIsNaN(),
+				_ => ThenResultShouldBeFalse()
+			);
+		}
+
+		[Scenario]
+		public void Should_check_IsMultipleOf_Linq()
+		{
+			Runner.RunScenario(
+				_ => GivenInt(6),
+				_ => WhenIsMultipleOfLinq(),
+				_ => ThenResultShouldBeTrue(),
+				_ => GivenInt(7),
+				_ => WhenIsMultipleOfLinq(),
+				_ => ThenResultShouldBeFalse()
+			);
+		}
+
+		[Scenario]
+		public void Should_check_IsLowerThan_Linq()
+		{
+			Runner.RunScenario(
+				_ => GivenNumber(2),
+				_ => GivenComparison(3),
+				_ => WhenIsLowerThanLinq(),
+				_ => ThenResultShouldBeTrue(),
+				_ => GivenNumber(4),
+				_ => GivenComparison(3),
+				_ => WhenIsLowerThanLinq(),
+				_ => ThenResultShouldBeFalse()
+			);
+		}
+
+		[Scenario]
+		public void Should_check_IsLowerOrEqualTo_Linq()
+		{
+			Runner.RunScenario(
+				_ => GivenNumber(2),
+				_ => GivenComparison(3),
+				_ => WhenIsLowerOrEqualToLinq(),
+				_ => ThenResultShouldBeTrue(),
+				_ => GivenNumber(4),
+				_ => GivenComparison(3),
+				_ => WhenIsLowerOrEqualToLinq(),
+				_ => ThenResultShouldBeFalse()
+			);
+		}
+
+		[Scenario]
+		public void Should_check_IsGreaterThan_Linq()
+		{
+			Runner.RunScenario(
+				_ => GivenNumber(4),
+				_ => GivenComparison(3),
+				_ => WhenIsGreaterThanLinq(),
+				_ => ThenResultShouldBeTrue(),
+				_ => GivenNumber(2),
+				_ => GivenComparison(3),
+				_ => WhenIsGreaterThanLinq(),
+				_ => ThenResultShouldBeFalse()
+			);
+		}
+
+		[Scenario]
+		public void Should_check_IsGreaterOrEqualTo_Linq()
+		{
+			Runner.RunScenario(
+				_ => GivenNumber(4),
+				_ => GivenComparison(3),
+				_ => WhenIsGreaterOrEqualToLinq(),
+				_ => ThenResultShouldBeTrue(),
+				_ => GivenNumber(2),
+				_ => GivenComparison(3),
+				_ => WhenIsGreaterOrEqualToLinq(),
+				_ => ThenResultShouldBeFalse()
+			);
+		}
+
+		[Scenario]
+		public void Should_check_IsBetweenExcludingMin_Linq()
+		{
+			Runner.RunScenario(
+				_ => GivenNumber(4),
+				_ => WhenIsBetweenExcludingMinLinq(3, 5),
+				_ => ThenResultShouldBeTrue(),
+				_ => GivenNumber(3),
+				_ => WhenIsBetweenExcludingMinLinq(3, 5),
+				_ => ThenResultShouldBeFalse()
+			);
+		}
+
+		[Scenario]
+		public void Should_check_IsBetweenExcludingMax_Linq()
+		{
+			Runner.RunScenario(
+				_ => GivenNumber(4),
+				_ => WhenIsBetweenExcludingMaxLinq(3, 5),
+				_ => ThenResultShouldBeTrue(),
+				_ => GivenNumber(5),
+				_ => WhenIsBetweenExcludingMaxLinq(3, 5),
+				_ => ThenResultShouldBeFalse()
+			);
+		}
+
+		[Scenario]
+		public void Should_check_IsBetweenExcludingBoundaries_Linq()
+		{
+			Runner.RunScenario(
+				_ => GivenNumber(4),
+				_ => WhenIsBetweenExcludingBoundariesLinq(3, 5),
+				_ => ThenResultShouldBeTrue(),
+				_ => GivenNumber(3),
+				_ => WhenIsBetweenExcludingBoundariesLinq(3, 5),
+				_ => ThenResultShouldBeFalse(),
+				_ => GivenNumber(5),
+				_ => WhenIsBetweenExcludingBoundariesLinq(3, 5),
+				_ => ThenResultShouldBeFalse()
+			);
+		}
+
+		[Scenario]
+		public void Should_check_IsBetween_Linq()
+		{
+			Runner.RunScenario(
+				_ => GivenNumber(4),
+				_ => WhenIsBetweenLinq(3, 5),
+				_ => ThenResultShouldBeTrue(),
+				_ => GivenNumber(2),
+				_ => WhenIsBetweenLinq(3, 5),
+				_ => ThenResultShouldBeFalse(),
+				_ => GivenNumber(6),
+				_ => WhenIsBetweenLinq(3, 5),
 				_ => ThenResultShouldBeFalse()
 			);
 		}
