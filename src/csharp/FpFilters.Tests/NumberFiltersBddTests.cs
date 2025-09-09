@@ -329,5 +329,61 @@ namespace FpFilters.NumberFilters.BddTests
 				_ => ThenResultShouldBeFalse()
 			);
 		}
+
+		[Scenario]
+		public void Should_filter_collection_with_IsBetweenExcludingMin_Linq_edge_cases()
+		{
+			var numbers = new[] { 2.0, 3.0, 4.0, 5.0 };
+			var result = numbers.Where(FpFilters.NumberFilters.NumberFilters.IsBetweenExcludingMin(3.0, 5.0)).ToArray();
+			Xunit.Assert.Equal(new[] { 4.0, 5.0 }, result);
+		}
+
+		[Scenario]
+		public void Should_filter_collection_with_IsBetweenExcludingMax_Linq_edge_cases()
+		{
+			var numbers = new[] { 2.0, 3.0, 4.0, 5.0 };
+			var result = numbers.Where(FpFilters.NumberFilters.NumberFilters.IsBetweenExcludingMax(3.0, 5.0)).ToArray();
+			Xunit.Assert.Equal(new[] { 3.0, 4.0 }, result);
+		}
+
+		[Scenario]
+		public void Should_filter_collection_with_IsBetweenExcludingBoundaries_Linq_edge_cases()
+		{
+			var numbers = new[] { 2.0, 3.0, 4.0, 5.0 };
+			var result = numbers.Where(FpFilters.NumberFilters.NumberFilters.IsBetweenExcludingBoundaries(3.0, 5.0)).ToArray();
+			Xunit.Assert.Equal(new[] { 4.0 }, result);
+		}
+
+		[Scenario]
+		public void Should_filter_collection_with_IsBetween_Linq_edge_cases()
+		{
+			var numbers = new[] { 2.0, 3.0, 4.0, 5.0, 6.0 };
+			var result = numbers.Where(FpFilters.NumberFilters.NumberFilters.IsBetween(3.0, 5.0)).ToArray();
+			Xunit.Assert.Equal(new[] { 3.0, 4.0, 5.0 }, result);
+		}
+
+		[Scenario]
+		public void Should_filter_collection_with_IsLowerThan_Linq_all_false()
+		{
+			var numbers = new[] { 3.0, 4.0, 5.0 };
+			var result = numbers.Where(FpFilters.NumberFilters.NumberFilters.IsLowerThan(2.0)).ToArray();
+			Xunit.Assert.Empty(result);
+		}
+
+		[Scenario]
+		public void Should_filter_collection_with_IsGreaterThan_Linq_all_true()
+		{
+			var numbers = new[] { 4.0, 5.0, 6.0 };
+			var result = numbers.Where(FpFilters.NumberFilters.NumberFilters.IsGreaterThan(3.0)).ToArray();
+			Xunit.Assert.Equal(new[] { 4.0, 5.0, 6.0 }, result);
+		}
+
+		[Scenario]
+		public void Should_filter_collection_with_IsMultipleOf_Linq_none()
+		{
+			var numbers = new[] { 2, 4, 5 };
+			var result = numbers.Where(FpFilters.NumberFilters.NumberFilters.IsMultipleOf(3)).ToArray();
+			Xunit.Assert.Empty(result);
+		}
 	}
 }
