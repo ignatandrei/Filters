@@ -6,7 +6,7 @@ namespace FpFilters.MiscFilters.BddTests
         private object? arg;
         private bool result;
 
-        private void GivenValue(object value) => arg = value;
+        private void GivenValue(object? value) => arg = value;
         private void WhenIsNullOrDefault() => result = FpFilters.MiscFilters.MiscFilters.IsNullOrDefault(arg);
         private void WhenIsNotNullOrDefault() => result = FpFilters.MiscFilters.MiscFilters.IsNotNullOrDefault(arg);
         private void ThenResultShouldBeTrue() => Xunit.Assert.True(result);

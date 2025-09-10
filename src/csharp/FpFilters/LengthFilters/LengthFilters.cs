@@ -2,7 +2,7 @@ namespace FpFilters.LengthFilters
 {
     public static class LengthFilters
     {
-        public static bool IsEmpty(object arg)
+        public static bool IsEmpty(object? arg)
         {
             if (arg == null) return false;
             if (arg is string s) return s.Length == 0;
