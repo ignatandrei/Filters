@@ -14,7 +14,7 @@ namespace FpFilters.LengthFilters
 
         public static bool IsNotEmpty(object arg) => !IsEmpty(arg);
 
-        public static bool HasLength(object arg, int len)
+        public static bool HasLength(object? arg, int len)
         {
             if (arg == null) return false;
             if (arg is string s) return s.Length == len;
@@ -24,7 +24,7 @@ namespace FpFilters.LengthFilters
             return false;
         }
 
-        public static bool HasLengthMin(object arg, int min)
+        public static bool HasLengthMin(object? arg, int min)
         {
             if (arg == null) return false;
             if (arg is string s) return s.Length >= min;
@@ -34,7 +34,7 @@ namespace FpFilters.LengthFilters
             return false;
         }
 
-        public static bool HasLengthMax(object arg, int max)
+        public static bool HasLengthMax(object? arg, int max)
         {
             if (arg == null) return false;
             if (arg is string s) return s.Length <= max;
@@ -44,7 +44,7 @@ namespace FpFilters.LengthFilters
             return false;
         }
 
-        public static bool HasLengthBetween(object arg, int min, int max)
+        public static bool HasLengthBetween(object? arg, int min, int max)
         {
             return HasLengthMin(arg, min) && HasLengthMax(arg, max);
         }

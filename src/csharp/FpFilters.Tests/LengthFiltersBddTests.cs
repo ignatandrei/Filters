@@ -126,7 +126,7 @@ namespace FpFilters.LengthFilters.BddTests
         [Scenario]
         public void Should_check_null_and_missing_length_property_cases()
         {
-            object nullObj = null;
+            object? nullObj = null;
             object noLength = new { Value = 42 };
             Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.HasLength(nullObj, 1));
             Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.HasLengthMin(nullObj, 1));
