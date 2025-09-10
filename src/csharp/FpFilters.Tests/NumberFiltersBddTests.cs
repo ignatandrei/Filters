@@ -6,34 +6,34 @@ namespace FpFilters.NumberFilters.BddTests
 		private double arg;
 		private double comparison;
 		private int intArg;
-		private bool result;
+		private bool filtered;
 
 		private void GivenNumber(double value) => arg = value;
 		private void GivenInt(int value) => intArg = value;
 		private void GivenComparison(double value) => comparison = value;
-		private void WhenIsEven() => result = FpFilters.NumberFilters.NumberFilters.IsEven(intArg);
-		private void WhenIsOdd() => result = FpFilters.NumberFilters.NumberFilters.IsOdd(intArg);
-		private void WhenIsPositive() => result = FpFilters.NumberFilters.NumberFilters.IsPositive(arg);
-		private void WhenIsNegative() => result = FpFilters.NumberFilters.NumberFilters.IsNegative(arg);
-		private void WhenIsZero() => result = FpFilters.NumberFilters.NumberFilters.IsZero(arg);
-		private void WhenIsGreaterThan() => result = FpFilters.NumberFilters.NumberFilters.IsGreaterThan(arg, comparison);
-		private void WhenIsLessThan() => result = FpFilters.NumberFilters.NumberFilters.IsLowerThan(arg, comparison);
-		private void WhenIsEqualTo() => result = FpFilters.NumberFilters.NumberFilters.IsLowerOrEqualTo(arg, comparison) && FpFilters.NumberFilters.NumberFilters.IsGreaterOrEqualTo(arg, comparison);
-		private void WhenIsNotEqualTo() => result = !(FpFilters.NumberFilters.NumberFilters.IsLowerOrEqualTo(arg, comparison) && FpFilters.NumberFilters.NumberFilters.IsGreaterOrEqualTo(arg, comparison));
-		private void WhenIsFinite() => result = !double.IsInfinity(arg) && !double.IsNaN(arg);
-		private void WhenIsInfinite() => result = double.IsInfinity(arg);
-		private void WhenIsNaN() => result = double.IsNaN(arg);
-		private void ThenResultShouldBeTrue() => Xunit.Assert.True(result);
-		private void ThenResultShouldBeFalse() => Xunit.Assert.False(result);
-		private void WhenIsMultipleOfLinq() => result = FpFilters.NumberFilters.NumberFilters.IsMultipleOf(3)(intArg);
-		private void WhenIsLowerThanLinq() => result = FpFilters.NumberFilters.NumberFilters.IsLowerThan(comparison)(arg);
-		private void WhenIsLowerOrEqualToLinq() => result = FpFilters.NumberFilters.NumberFilters.IsLowerOrEqualTo(comparison)(arg);
-		private void WhenIsGreaterThanLinq() => result = FpFilters.NumberFilters.NumberFilters.IsGreaterThan(comparison)(arg);
-		private void WhenIsGreaterOrEqualToLinq() => result = FpFilters.NumberFilters.NumberFilters.IsGreaterOrEqualTo(comparison)(arg);
-		private void WhenIsBetweenExcludingMinLinq(double min, double max) => result = FpFilters.NumberFilters.NumberFilters.IsBetweenExcludingMin(min, max)(arg);
-		private void WhenIsBetweenExcludingMaxLinq(double min, double max) => result = FpFilters.NumberFilters.NumberFilters.IsBetweenExcludingMax(min, max)(arg);
-		private void WhenIsBetweenExcludingBoundariesLinq(double min, double max) => result = FpFilters.NumberFilters.NumberFilters.IsBetweenExcludingBoundaries(min, max)(arg);
-		private void WhenIsBetweenLinq(double min, double max) => result = FpFilters.NumberFilters.NumberFilters.IsBetween(min, max)(arg);
+		private void WhenIsEven() => filtered = FpFilters.NumberFilters.NumberFilters.IsEven(intArg);
+		private void WhenIsOdd() => filtered = FpFilters.NumberFilters.NumberFilters.IsOdd(intArg);
+		private void WhenIsPositive() => filtered = FpFilters.NumberFilters.NumberFilters.IsPositive(arg);
+		private void WhenIsNegative() => filtered = FpFilters.NumberFilters.NumberFilters.IsNegative(arg);
+		private void WhenIsZero() => filtered = FpFilters.NumberFilters.NumberFilters.IsZero(arg);
+		private void WhenIsGreaterThan() => filtered = FpFilters.NumberFilters.NumberFilters.IsGreaterThan(arg, comparison);
+		private void WhenIsLessThan() => filtered = FpFilters.NumberFilters.NumberFilters.IsLowerThan(arg, comparison);
+		private void WhenIsEqualTo() => filtered = FpFilters.NumberFilters.NumberFilters.IsLowerOrEqualTo(arg, comparison) && FpFilters.NumberFilters.NumberFilters.IsGreaterOrEqualTo(arg, comparison);
+		private void WhenIsNotEqualTo() => filtered = !(FpFilters.NumberFilters.NumberFilters.IsLowerOrEqualTo(arg, comparison) && FpFilters.NumberFilters.NumberFilters.IsGreaterOrEqualTo(arg, comparison));
+		private void WhenIsFinite() => filtered = !double.IsInfinity(arg) && !double.IsNaN(arg);
+		private void WhenIsInfinite() => filtered = double.IsInfinity(arg);
+		private void WhenIsNaN() => filtered = double.IsNaN(arg);
+		private void ThenResultShouldBeTrue() => Xunit.Assert.True(filtered);
+		private void ThenResultShouldBeFalse() => Xunit.Assert.False(filtered);
+		private void WhenIsMultipleOfLinq() => filtered = FpFilters.NumberFilters.NumberFilters.IsMultipleOf(3)(intArg);
+		private void WhenIsLowerThanLinq() => filtered = FpFilters.NumberFilters.NumberFilters.IsLowerThan(comparison)(arg);
+		private void WhenIsLowerOrEqualToLinq() => filtered = FpFilters.NumberFilters.NumberFilters.IsLowerOrEqualTo(comparison)(arg);
+		private void WhenIsGreaterThanLinq() => filtered = FpFilters.NumberFilters.NumberFilters.IsGreaterThan(comparison)(arg);
+		private void WhenIsGreaterOrEqualToLinq() => filtered = FpFilters.NumberFilters.NumberFilters.IsGreaterOrEqualTo(comparison)(arg);
+		private void WhenIsBetweenExcludingMinLinq(double min, double max) => filtered = FpFilters.NumberFilters.NumberFilters.IsBetweenExcludingMin(min, max)(arg);
+		private void WhenIsBetweenExcludingMaxLinq(double min, double max) => filtered = FpFilters.NumberFilters.NumberFilters.IsBetweenExcludingMax(min, max)(arg);
+		private void WhenIsBetweenExcludingBoundariesLinq(double min, double max) => filtered = FpFilters.NumberFilters.NumberFilters.IsBetweenExcludingBoundaries(min, max)(arg);
+		private void WhenIsBetweenLinq(double min, double max) => filtered = FpFilters.NumberFilters.NumberFilters.IsBetween(min, max)(arg);
 
 		[Scenario]
 		public void Should_check_if_number_is_even()
