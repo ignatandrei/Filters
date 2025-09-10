@@ -12,7 +12,11 @@ namespace FpFilters.NumberFilters
         public static bool IsNegativeOrZero(double arg) => arg <= 0;
         public static bool IsNegative(double arg) => arg < 0;
         public static bool IsMultipleOf(int n, int m) => n % m == 0;
-        public static Func<int, bool> IsMultipleOf(int m) => n => IsMultipleOf(n, m);
+        public static Func<int, bool> IsMultipleOf(int m)
+        {
+            if (m == 0) throw new System.ArgumentOutOfRangeException(nameof(m), "m must be non-zero.");
+            return n => IsMultipleOf(n, m);
+        }
         public static bool IsLowerThan(double arg, double comparison) => arg < comparison;
         public static Func<double, bool> IsLowerThan(double comparison) => arg => IsLowerThan(arg, comparison);
         public static bool IsLowerOrEqualTo(double arg, double comparison) => arg <= comparison;
