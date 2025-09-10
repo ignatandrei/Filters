@@ -7,7 +7,7 @@ namespace FpFilters.ObjectFilters.BddTests
         private object? comparison;
         private bool result;
 
-        private void GivenObject(object value) => arg = value;
+        private void GivenObject(object? value) => arg = value;
         private void GivenComparison(object value) => comparison = value;
         private void WhenIsNull() => result = FpFilters.ObjectFilters.ObjectFilters.IsNull(arg);
         private void WhenIsNotNull() => result = FpFilters.ObjectFilters.ObjectFilters.IsNotNull(arg);
