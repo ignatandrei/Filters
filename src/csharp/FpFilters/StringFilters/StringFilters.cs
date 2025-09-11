@@ -6,9 +6,17 @@ namespace FpFilters.StringFilters
         public static bool StartsWith(string? arg, string substring) => arg?.StartsWith(substring) ?? false;
         public static Func<string?, bool> StartsWith(string substring) => arg => StartsWith(arg, substring);
 
+        // Returns true if the string starts with the specified substring, with StringComparison
+        public static bool StartsWith(string? arg, string substring, StringComparison comparison) => arg?.StartsWith(substring, comparison) ?? false;
+        public static Func<string?, bool> StartsWith(string substring, StringComparison comparison) => arg => StartsWith(arg, substring, comparison);
+
         // Returns true if the string ends with the specified substring
         public static bool EndsWith(string? arg, string substring) => arg?.EndsWith(substring) ?? false;
         public static Func<string?, bool> EndsWith(string substring) => arg => EndsWith(arg, substring);
+
+        // Returns true if the string ends with the specified substring, with StringComparison
+        public static bool EndsWith(string? arg, string substring, StringComparison comparison) => arg?.EndsWith(substring, comparison) ?? false;
+        public static Func<string?, bool> EndsWith(string substring, StringComparison comparison) => arg => EndsWith(arg, substring, comparison);
 
         // Returns true if the string includes the specified substring
         public static bool Includes(string? arg, string substring) => arg?.Contains(substring) ?? false;
