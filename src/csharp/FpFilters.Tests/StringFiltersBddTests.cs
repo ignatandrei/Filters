@@ -216,5 +216,29 @@ namespace FpFilters.StringFilters.BddTests
                 _ => ThenResultShouldBeFalse()
             );
         }
+
+        private void WhenStartsWithLinq(string substring) => result = FpFilters.StringFilters.StringFilters.StartsWith(substring)(arg);
+        private void WhenEndsWithLinq(string substring) => result = FpFilters.StringFilters.StringFilters.EndsWith(substring)(arg);
+        private void WhenIncludesLinq(string substring) => result = FpFilters.StringFilters.StringFilters.Includes(substring)(arg);
+        private void WhenMatchesLinq(string pattern, string value) => result = FpFilters.StringFilters.StringFilters.Matches(pattern)(value);
+        private void WhenDoesNotMatchLinq(string pattern, string value) => result = FpFilters.StringFilters.StringFilters.DoesNotMatch(pattern)(value);
+
+        [Scenario]
+        public void Should_support_linq_overloads_for_two_arg_functions()
+        {
+            Runner.RunScenario(
+                _ => GivenString("hello world"),
+                _ => WhenStartsWithLinq("hello"),
+                _ => ThenResultShouldBeTrue(),
+                _ => WhenEndsWithLinq("world"),
+                _ => ThenResultShouldBeTrue(),
+                _ => WhenIncludesLinq("lo wo"),
+                _ => ThenResultShouldBeTrue(),
+                _ => WhenMatchesLinq("[a-z]+[0-9]+", "abc123"),
+                _ => ThenResultShouldBeTrue(),
+                _ => WhenDoesNotMatchLinq("[0-9]+", "abc"),
+                _ => ThenResultShouldBeTrue()
+            );
+        }
     }
 }
