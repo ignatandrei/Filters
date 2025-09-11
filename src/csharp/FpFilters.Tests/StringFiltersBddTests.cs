@@ -216,5 +216,92 @@ namespace FpFilters.StringFilters.BddTests
                 _ => ThenResultShouldBeFalse()
             );
         }
+
+        private void WhenStartsWithLinq(string substring) => result = FpFilters.StringFilters.StringFilters.StartsWith(substring)(arg);
+        private void WhenEndsWithLinq(string substring) => result = FpFilters.StringFilters.StringFilters.EndsWith(substring)(arg);
+        private void WhenIncludesLinq(string substring) => result = FpFilters.StringFilters.StringFilters.Includes(substring)(arg);
+        private void WhenMatchesLinq(string pattern, string value) => result = FpFilters.StringFilters.StringFilters.Matches(pattern)(value);
+        private void WhenDoesNotMatchLinq(string pattern, string value) => result = FpFilters.StringFilters.StringFilters.DoesNotMatch(pattern)(value);
+
+        [Scenario]
+        public void Should_support_linq_overloads_for_two_arg_functions()
+        {
+            Runner.RunScenario(
+                _ => GivenString("hello world"),
+                _ => WhenStartsWithLinq("hello"),
+                _ => ThenResultShouldBeTrue(),
+                _ => WhenEndsWithLinq("world"),
+                _ => ThenResultShouldBeTrue(),
+                _ => WhenIncludesLinq("lo wo"),
+                _ => ThenResultShouldBeTrue(),
+                _ => WhenMatchesLinq("[a-z]+[0-9]+", "abc123"),
+                _ => ThenResultShouldBeTrue(),
+                _ => WhenDoesNotMatchLinq("[0-9]+", "abc"),
+                _ => ThenResultShouldBeTrue()
+            );
+        }
+
+        private void WhenStartsWithComparison(string substring, StringComparison comparisonType) => result = FpFilters.StringFilters.StringFilters.StartsWith(arg, substring, comparisonType);
+        private void WhenStartsWithLinqComparison(string substring, StringComparison comparisonType) => result = FpFilters.StringFilters.StringFilters.StartsWith(substring, comparisonType)(arg);
+        private void WhenEndsWithComparison(string substring, StringComparison comparisonType) => result = FpFilters.StringFilters.StringFilters.EndsWith(arg, substring, comparisonType);
+        private void WhenEndsWithLinqComparison(string substring, StringComparison comparisonType) => result = FpFilters.StringFilters.StringFilters.EndsWith(substring, comparisonType)(arg);
+        private void WhenIncludesComparison(string substring, StringComparison comparisonType) => result = FpFilters.StringFilters.StringFilters.Includes(arg, substring, comparisonType);
+        private void WhenIncludesLinqComparison(string substring, StringComparison comparisonType) => result = FpFilters.StringFilters.StringFilters.Includes(substring, comparisonType)(arg);
+
+        [Scenario]
+        public void Should_check_startswith_and_endswith_with_stringcomparison()
+        {
+            Runner.RunScenario(
+                _ => GivenString("Hello World"),
+                _ => WhenStartsWithComparison("hello", StringComparison.OrdinalIgnoreCase),
+                _ => ThenResultShouldBeTrue(),
+                _ => WhenStartsWithComparison("hello", StringComparison.Ordinal),
+                _ => ThenResultShouldBeFalse(),
+                _ => WhenEndsWithComparison("WORLD", StringComparison.OrdinalIgnoreCase),
+                _ => ThenResultShouldBeTrue(),
+                _ => WhenEndsWithComparison("WORLD", StringComparison.Ordinal),
+                _ => ThenResultShouldBeFalse()
+            );
+        }
+
+        [Scenario]
+        public void Should_support_linq_overloads_for_startswith_and_endswith_with_stringcomparison()
+        {
+            Runner.RunScenario(
+                _ => GivenString("Hello World"),
+                _ => WhenStartsWithLinqComparison("hello", StringComparison.OrdinalIgnoreCase),
+                _ => ThenResultShouldBeTrue(),
+                _ => WhenStartsWithLinqComparison("hello", StringComparison.Ordinal),
+                _ => ThenResultShouldBeFalse(),
+                _ => WhenEndsWithLinqComparison("WORLD", StringComparison.OrdinalIgnoreCase),
+                _ => ThenResultShouldBeTrue(),
+                _ => WhenEndsWithLinqComparison("WORLD", StringComparison.Ordinal),
+                _ => ThenResultShouldBeFalse()
+            );
+        }
+
+        [Scenario]
+        public void Should_check_includes_with_stringcomparison()
+        {
+            Runner.RunScenario(
+                _ => GivenString("Hello World"),
+                _ => WhenIncludesComparison("world", StringComparison.OrdinalIgnoreCase),
+                _ => ThenResultShouldBeTrue(),
+                _ => WhenIncludesComparison("world", StringComparison.Ordinal),
+                _ => ThenResultShouldBeFalse()
+            );
+        }
+
+        [Scenario]
+        public void Should_support_linq_overloads_for_includes_with_stringcomparison()
+        {
+            Runner.RunScenario(
+                _ => GivenString("Hello World"),
+                _ => WhenIncludesLinqComparison("world", StringComparison.OrdinalIgnoreCase),
+                _ => ThenResultShouldBeTrue(),
+                _ => WhenIncludesLinqComparison("world", StringComparison.Ordinal),
+                _ => ThenResultShouldBeFalse()
+            );
+        }
     }
 }
