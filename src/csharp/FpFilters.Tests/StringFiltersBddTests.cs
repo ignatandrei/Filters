@@ -245,6 +245,8 @@ namespace FpFilters.StringFilters.BddTests
         private void WhenStartsWithLinqComparison(string substring, StringComparison comparisonType) => result = FpFilters.StringFilters.StringFilters.StartsWith(substring, comparisonType)(arg);
         private void WhenEndsWithComparison(string substring, StringComparison comparisonType) => result = FpFilters.StringFilters.StringFilters.EndsWith(arg, substring, comparisonType);
         private void WhenEndsWithLinqComparison(string substring, StringComparison comparisonType) => result = FpFilters.StringFilters.StringFilters.EndsWith(substring, comparisonType)(arg);
+        private void WhenIncludesComparison(string substring, StringComparison comparisonType) => result = FpFilters.StringFilters.StringFilters.Includes(arg, substring, comparisonType);
+        private void WhenIncludesLinqComparison(string substring, StringComparison comparisonType) => result = FpFilters.StringFilters.StringFilters.Includes(substring, comparisonType)(arg);
 
         [Scenario]
         public void Should_check_startswith_and_endswith_with_stringcomparison()
@@ -274,6 +276,30 @@ namespace FpFilters.StringFilters.BddTests
                 _ => WhenEndsWithLinqComparison("WORLD", StringComparison.OrdinalIgnoreCase),
                 _ => ThenResultShouldBeTrue(),
                 _ => WhenEndsWithLinqComparison("WORLD", StringComparison.Ordinal),
+                _ => ThenResultShouldBeFalse()
+            );
+        }
+
+        [Scenario]
+        public void Should_check_includes_with_stringcomparison()
+        {
+            Runner.RunScenario(
+                _ => GivenString("Hello World"),
+                _ => WhenIncludesComparison("world", StringComparison.OrdinalIgnoreCase),
+                _ => ThenResultShouldBeTrue(),
+                _ => WhenIncludesComparison("world", StringComparison.Ordinal),
+                _ => ThenResultShouldBeFalse()
+            );
+        }
+
+        [Scenario]
+        public void Should_support_linq_overloads_for_includes_with_stringcomparison()
+        {
+            Runner.RunScenario(
+                _ => GivenString("Hello World"),
+                _ => WhenIncludesLinqComparison("world", StringComparison.OrdinalIgnoreCase),
+                _ => ThenResultShouldBeTrue(),
+                _ => WhenIncludesLinqComparison("world", StringComparison.Ordinal),
                 _ => ThenResultShouldBeFalse()
             );
         }

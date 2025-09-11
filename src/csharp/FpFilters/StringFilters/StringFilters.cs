@@ -22,6 +22,10 @@ namespace FpFilters.StringFilters
         public static bool Includes(string? arg, string substring) => arg?.Contains(substring) ?? false;
         public static Func<string?, bool> Includes(string substring) => arg => Includes(arg, substring);
 
+        // Returns true if the string includes the specified substring, with StringComparison
+        public static bool Includes(string? arg, string substring, StringComparison comparison) => arg?.IndexOf(substring, comparison) >= 0;
+        public static Func<string?, bool> Includes(string substring, StringComparison comparison) => arg => Includes(arg, substring, comparison);
+
         // Returns true if the argument is an empty string ('')
         public static bool IsEmptyString(string? arg) => arg == "";
 
