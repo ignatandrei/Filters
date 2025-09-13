@@ -6,6 +6,8 @@ namespace FpFilters.LengthFilters.BddTests
         private string? arg;
         private int comparison;
         private bool result;
+        private Func<object?, bool>? linqFilter;
+        private Func<string?, bool>? linqStringFilter;
 
         private void GivenString(string value) => arg = value;
         private void GivenComparison(int value) => comparison = value;
@@ -15,6 +17,11 @@ namespace FpFilters.LengthFilters.BddTests
         private void WhenIsLengthZero() => result = FpFilters.LengthFilters.LengthFilters.IsLengthZero(arg);
         private void ThenResultShouldBeTrue() => Xunit.Assert.True(result);
         private void ThenResultShouldBeFalse() => Xunit.Assert.False(result);
+
+        private void GivenLinqFilter(Func<object?, bool> filter) => linqFilter = filter;
+        private void GivenLinqStringFilter(Func<string?, bool> filter) => linqStringFilter = filter;
+        private void WhenApplyLinqFilter() => result = linqFilter!(arg);
+        private void WhenApplyLinqStringFilter() => result = linqStringFilter!(arg);
 
         [Scenario]
         public void Should_check_if_string_length_is_equal_to_comparison()
@@ -193,6 +200,163 @@ namespace FpFilters.LengthFilters.BddTests
             Xunit.Assert.True(FpFilters.LengthFilters.LengthFilters.HasLengthMax(array, 4));
             Xunit.Assert.True(FpFilters.LengthFilters.LengthFilters.HasLengthMax(array, 6));
             Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.HasLengthMax(array, 3));
+        }
+
+        [Scenario]
+        public void Should_check_HasLength_linq()
+        {
+            Runner.RunScenario(
+                _ => GivenLinqFilter(FpFilters.LengthFilters.LengthFilters.HasLength(3)),
+                _ => GivenString("abc"),
+                _ => WhenApplyLinqFilter(),
+                _ => ThenResultShouldBeTrue(),
+                _ => GivenString("ab"),
+                _ => WhenApplyLinqFilter(),
+                _ => ThenResultShouldBeFalse()
+            );
+        }
+
+        [Scenario]
+        public void Should_check_HasLengthMin_linq()
+        {
+            Runner.RunScenario(
+                _ => GivenLinqFilter(FpFilters.LengthFilters.LengthFilters.HasLengthMin(2)),
+                _ => GivenString("abc"),
+                _ => WhenApplyLinqFilter(),
+                _ => ThenResultShouldBeTrue(),
+                _ => GivenString("a"),
+                _ => WhenApplyLinqFilter(),
+                _ => ThenResultShouldBeFalse()
+            );
+        }
+
+        [Scenario]
+        public void Should_check_HasLengthMax_linq()
+        {
+            Runner.RunScenario(
+                _ => GivenLinqFilter(FpFilters.LengthFilters.LengthFilters.HasLengthMax(3)),
+                _ => GivenString("abc"),
+                _ => WhenApplyLinqFilter(),
+                _ => ThenResultShouldBeTrue(),
+                _ => GivenString("abcd"),
+                _ => WhenApplyLinqFilter(),
+                _ => ThenResultShouldBeFalse()
+            );
+        }
+
+        [Scenario]
+        public void Should_check_HasLengthBetween_linq()
+        {
+            Runner.RunScenario(
+                _ => GivenLinqFilter(FpFilters.LengthFilters.LengthFilters.HasLengthBetween(2, 3)),
+                _ => GivenString("abc"),
+                _ => WhenApplyLinqFilter(),
+                _ => ThenResultShouldBeTrue(),
+                _ => GivenString("a"),
+                _ => WhenApplyLinqFilter(),
+                _ => ThenResultShouldBeFalse(),
+                _ => GivenString("abcd"),
+                _ => WhenApplyLinqFilter(),
+                _ => ThenResultShouldBeFalse()
+            );
+        }
+
+        [Scenario]
+        public void Should_check_HasNotLength_linq()
+        {
+            Runner.RunScenario(
+                _ => GivenLinqFilter(FpFilters.LengthFilters.LengthFilters.HasNotLength(2)),
+                _ => GivenString("abc"),
+                _ => WhenApplyLinqFilter(),
+                _ => ThenResultShouldBeTrue(),
+                _ => GivenString("ab"),
+                _ => WhenApplyLinqFilter(),
+                _ => ThenResultShouldBeFalse()
+            );
+        }
+
+        [Scenario]
+        public void Should_check_HasNotLengthMin_linq()
+        {
+            Runner.RunScenario(
+                _ => GivenLinqFilter(FpFilters.LengthFilters.LengthFilters.HasNotLengthMin(2)),
+                _ => GivenString("a"),
+                _ => WhenApplyLinqFilter(),
+                _ => ThenResultShouldBeTrue(),
+                _ => GivenString("abc"),
+                _ => WhenApplyLinqFilter(),
+                _ => ThenResultShouldBeFalse()
+            );
+        }
+
+        [Scenario]
+        public void Should_check_HasNotLengthMax_linq()
+        {
+            Runner.RunScenario(
+                _ => GivenLinqFilter(FpFilters.LengthFilters.LengthFilters.HasNotLengthMax(3)),
+                _ => GivenString("abcd"),
+                _ => WhenApplyLinqFilter(),
+                _ => ThenResultShouldBeTrue(),
+                _ => GivenString("abc"),
+                _ => WhenApplyLinqFilter(),
+                _ => ThenResultShouldBeFalse()
+            );
+        }
+
+        [Scenario]
+        public void Should_check_HasNotLengthBetween_linq()
+        {
+            Runner.RunScenario(
+                _ => GivenLinqFilter(FpFilters.LengthFilters.LengthFilters.HasNotLengthBetween(2, 3)),
+                _ => GivenString("a"),
+                _ => WhenApplyLinqFilter(),
+                _ => ThenResultShouldBeTrue(),
+                _ => GivenString("abc"),
+                _ => WhenApplyLinqFilter(),
+                _ => ThenResultShouldBeFalse()
+            );
+        }
+
+        [Scenario]
+        public void Should_check_IsLengthEqualTo_linq()
+        {
+            Runner.RunScenario(
+                _ => GivenLinqStringFilter(FpFilters.LengthFilters.LengthFilters.IsLengthEqualTo(3)),
+                _ => GivenString("abc"),
+                _ => WhenApplyLinqStringFilter(),
+                _ => ThenResultShouldBeTrue(),
+                _ => GivenString("ab"),
+                _ => WhenApplyLinqStringFilter(),
+                _ => ThenResultShouldBeFalse()
+            );
+        }
+
+        [Scenario]
+        public void Should_check_IsLengthGreaterThan_linq()
+        {
+            Runner.RunScenario(
+                _ => GivenLinqStringFilter(FpFilters.LengthFilters.LengthFilters.IsLengthGreaterThan(2)),
+                _ => GivenString("abc"),
+                _ => WhenApplyLinqStringFilter(),
+                _ => ThenResultShouldBeTrue(),
+                _ => GivenString("ab"),
+                _ => WhenApplyLinqStringFilter(),
+                _ => ThenResultShouldBeFalse()
+            );
+        }
+
+        [Scenario]
+        public void Should_check_IsLengthLessThan_linq()
+        {
+            Runner.RunScenario(
+                _ => GivenLinqStringFilter(FpFilters.LengthFilters.LengthFilters.IsLengthLessThan(3)),
+                _ => GivenString("ab"),
+                _ => WhenApplyLinqStringFilter(),
+                _ => ThenResultShouldBeTrue(),
+                _ => GivenString("abc"),
+                _ => WhenApplyLinqStringFilter(),
+                _ => ThenResultShouldBeFalse()
+            );
         }
     }
 }
