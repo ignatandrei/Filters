@@ -53,16 +53,16 @@ namespace FpFilters.LengthFilters
         }
         public static Func<object?, bool> HasLengthBetween(int min, int max) => arg => HasLengthBetween(arg, min, max);
 
-        public static bool HasNotLength(object arg, int len) => !HasLength(arg, len);
+        public static bool HasNotLength(object? arg, int len) => !HasLength(arg, len);
         public static Func<object?, bool> HasNotLength(int len) => arg => HasNotLength(arg, len);
 
-        public static bool HasNotLengthMin(object arg, int min) => !HasLengthMin(arg, min);
+        public static bool HasNotLengthMin(object? arg, int min) => !HasLengthMin(arg, min);
         public static Func<object?, bool> HasNotLengthMin(int min) => arg => HasNotLengthMin(arg, min);
 
-        public static bool HasNotLengthMax(object arg, int max) => !HasLengthMax(arg, max);
+        public static bool HasNotLengthMax(object? arg, int max) => !HasLengthMax(arg, max);
         public static Func<object?, bool> HasNotLengthMax(int max) => arg => HasNotLengthMax(arg, max);
 
-        public static bool HasNotLengthBetween(object arg, int min, int max) => !HasLengthBetween(arg, min, max);
+        public static bool HasNotLengthBetween(object? arg, int min, int max) => !HasLengthBetween(arg, min, max);
         public static Func<object?, bool> HasNotLengthBetween(int min, int max) => arg => HasNotLengthBetween(arg, min, max);
 
         // BDD test support methods
