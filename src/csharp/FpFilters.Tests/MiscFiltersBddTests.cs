@@ -43,5 +43,29 @@ namespace FpFilters.MiscFilters.BddTests
                 _ => ThenResultShouldBeTrue() // 0 is not null for reference types
             );
         }
+
+        [Scenario]
+        public void Should_check_Is_linq()
+        {
+            // Use local variables for generic delegate and argument
+            var is42 = FpFilters.MiscFilters.MiscFilters.Is(42);
+            Xunit.Assert.True(is42(42));
+            Xunit.Assert.False(is42(43));
+            var isStr = FpFilters.MiscFilters.MiscFilters.Is("abc");
+            Xunit.Assert.True(isStr("abc"));
+            Xunit.Assert.False(isStr("def"));
+        }
+
+        [Scenario]
+        public void Should_check_IsNot_linq()
+        {
+            // Use local variables for generic delegate and argument
+            var isNot42 = FpFilters.MiscFilters.MiscFilters.IsNot(42);
+            Xunit.Assert.True(isNot42(43));
+            Xunit.Assert.False(isNot42(42));
+            var isNotStr = FpFilters.MiscFilters.MiscFilters.IsNot("abc");
+            Xunit.Assert.True(isNotStr("def"));
+            Xunit.Assert.False(isNotStr("abc"));
+        }
     }
 }
