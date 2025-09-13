@@ -4,9 +4,11 @@ namespace FpFilters.MiscFilters
     {
         // Returns true if the argument is equal to the comparison parameter
         public static bool Is<T>(T arg, T comparison) => Equals(arg, comparison);
+        public static Func<T, bool> Is<T>(T comparison) => arg => Is(arg, comparison);
 
         // Returns true if the argument is different from the comparison parameter
         public static bool IsNot<T>(T arg, T comparison) => !Equals(arg, comparison);
+        public static Func<T, bool> IsNot<T>(T comparison) => arg => IsNot(arg, comparison);
 
         // Returns true for all elements (identity function for filter)
         public static bool All() => true;
