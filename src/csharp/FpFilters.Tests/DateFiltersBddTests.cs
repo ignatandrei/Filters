@@ -6,17 +6,21 @@ namespace FpFilters.DateFilters.BddTests
         private DateTime arg;
         private DateTime comparison;
         private bool result;
+        private Func<DateTime, bool> linqFilter;
 
         private void GivenDate(DateTime value) => arg = value;
         private void GivenComparison(DateTime value) => comparison = value;
-    private void WhenIsFutureDate() => result = FpFilters.DateFilters.DateFilters.IsFutureDate(arg, comparison);
-    private void WhenIsPastDate() => result = FpFilters.DateFilters.DateFilters.IsPastDate(arg, comparison);
+        private void WhenIsFutureDate() => result = FpFilters.DateFilters.DateFilters.IsFutureDate(arg, comparison);
+        private void WhenIsPastDate() => result = FpFilters.DateFilters.DateFilters.IsPastDate(arg, comparison);
         private void WhenIsSameDate() => result = FpFilters.DateFilters.DateFilters.IsSameDate(arg, comparison);
         private void WhenIsLeapYear() => result = FpFilters.DateFilters.DateFilters.IsLeapYear(arg);
         private void WhenIsMonday() => result = FpFilters.DateFilters.DateFilters.IsMonday(arg);
         private void WhenIsFriday() => result = FpFilters.DateFilters.DateFilters.IsFriday(arg);
         private void ThenResultShouldBeTrue() => Xunit.Assert.True(result);
         private void ThenResultShouldBeFalse() => Xunit.Assert.False(result);
+
+        private void GivenLinqFilter(Func<DateTime, bool> filter) => linqFilter = filter;
+        private void WhenApplyLinqFilter() => result = linqFilter(arg);
 
         [Scenario]
         public void Should_check_if_date_is_in_the_future()
@@ -29,6 +33,21 @@ namespace FpFilters.DateFilters.BddTests
                 _ => GivenDate(DateTime.Now.AddDays(-1)),
                 _ => GivenComparison(DateTime.Now),
                 _ => WhenIsFutureDate(),
+                _ => ThenResultShouldBeFalse()
+            );
+        }
+
+        [Scenario]
+        public void Should_check_if_date_is_in_the_future_linq()
+        {
+            var comparisonDate = DateTime.Now;
+            Runner.RunScenario(
+                _ => GivenLinqFilter(FpFilters.DateFilters.DateFilters.IsFutureDate(comparisonDate)),
+                _ => GivenDate(comparisonDate.AddDays(1)),
+                _ => WhenApplyLinqFilter(),
+                _ => ThenResultShouldBeTrue(),
+                _ => GivenDate(comparisonDate.AddDays(-1)),
+                _ => WhenApplyLinqFilter(),
                 _ => ThenResultShouldBeFalse()
             );
         }
@@ -49,6 +68,21 @@ namespace FpFilters.DateFilters.BddTests
         }
 
         [Scenario]
+        public void Should_check_if_date_is_in_the_past_linq()
+        {
+            var comparisonDate = DateTime.Now;
+            Runner.RunScenario(
+                _ => GivenLinqFilter(FpFilters.DateFilters.DateFilters.IsPastDate(comparisonDate)),
+                _ => GivenDate(comparisonDate.AddDays(-1)),
+                _ => WhenApplyLinqFilter(),
+                _ => ThenResultShouldBeTrue(),
+                _ => GivenDate(comparisonDate.AddDays(1)),
+                _ => WhenApplyLinqFilter(),
+                _ => ThenResultShouldBeFalse()
+            );
+        }
+
+        [Scenario]
         public void Should_check_if_dates_are_the_same()
         {
             var now = DateTime.Now;
@@ -60,6 +94,69 @@ namespace FpFilters.DateFilters.BddTests
                 _ => GivenDate(now),
                 _ => GivenComparison(now.AddDays(1)),
                 _ => WhenIsSameDate(),
+                _ => ThenResultShouldBeFalse()
+            );
+        }
+
+        [Scenario]
+        public void Should_check_if_dates_are_the_same_linq()
+        {
+            var now = DateTime.Now;
+            Runner.RunScenario(
+                _ => GivenLinqFilter(FpFilters.DateFilters.DateFilters.IsSameDate(now)),
+                _ => GivenDate(now),
+                _ => WhenApplyLinqFilter(),
+                _ => ThenResultShouldBeTrue(),
+                _ => GivenDate(now.AddDays(1)),
+                _ => WhenApplyLinqFilter(),
+                _ => ThenResultShouldBeFalse()
+            );
+        }
+
+        [Scenario]
+        public void Should_check_if_days_are_the_same_linq()
+        {
+            var now = DateTime.Now;
+            Runner.RunScenario(
+                _ => GivenLinqFilter(FpFilters.DateFilters.DateFilters.IsSameDay(now)),
+                _ => GivenDate(now),
+                _ => WhenApplyLinqFilter(),
+                _ => ThenResultShouldBeTrue(),
+                _ => GivenDate(now.AddMonths(1)),
+                _ => WhenApplyLinqFilter(),
+                _ => ThenResultShouldBeTrue(),
+                _ => GivenDate(now.AddDays(1)),
+                _ => WhenApplyLinqFilter(),
+                _ => ThenResultShouldBeFalse()
+            );
+        }
+
+        [Scenario]
+        public void Should_check_if_months_are_the_same_linq()
+        {
+            var now = DateTime.Now;
+            Runner.RunScenario(
+                _ => GivenLinqFilter(FpFilters.DateFilters.DateFilters.IsSameMonth(now)),
+                _ => GivenDate(now),
+                _ => WhenApplyLinqFilter(),
+                _ => ThenResultShouldBeTrue(),
+                _ => GivenDate(now.AddMonths(1)),
+                _ => WhenApplyLinqFilter(),
+                _ => ThenResultShouldBeFalse()
+            );
+        }
+
+        [Scenario]
+        public void Should_check_if_years_are_the_same_linq()
+        {
+            var now = DateTime.Now;
+            Runner.RunScenario(
+                _ => GivenLinqFilter(FpFilters.DateFilters.DateFilters.IsSameYear(now)),
+                _ => GivenDate(now),
+                _ => WhenApplyLinqFilter(),
+                _ => ThenResultShouldBeTrue(),
+                _ => GivenDate(now.AddYears(1)),
+                _ => WhenApplyLinqFilter(),
                 _ => ThenResultShouldBeFalse()
             );
         }

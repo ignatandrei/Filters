@@ -9,11 +9,22 @@ namespace FpFilters.DateFilters
         }
 
         public static bool IsFutureDate(DateTime date, DateTime comparison) => date > comparison;
+        public static Func<DateTime, bool> IsFutureDate(DateTime comparison) => date => IsFutureDate(date, comparison);
+
         public static bool IsPastDate(DateTime date, DateTime comparison) => date < comparison;
+        public static Func<DateTime, bool> IsPastDate(DateTime comparison) => date => IsPastDate(date, comparison);
+
         public static bool IsSameDate(DateTime date, DateTime comparison) => date.Date == comparison.Date;
+        public static Func<DateTime, bool> IsSameDate(DateTime comparison) => date => IsSameDate(date, comparison);
+
         public static bool IsSameDay(DateTime date, DateTime comparison) => date.Day == comparison.Day;
+        public static Func<DateTime, bool> IsSameDay(DateTime comparison) => date => IsSameDay(date, comparison);
+
         public static bool IsSameMonth(DateTime date, DateTime comparison) => date.Month == comparison.Month;
+        public static Func<DateTime, bool> IsSameMonth(DateTime comparison) => date => IsSameMonth(date, comparison);
+
         public static bool IsSameYear(DateTime date, DateTime comparison) => date.Year == comparison.Year;
+        public static Func<DateTime, bool> IsSameYear(DateTime comparison) => date => IsSameYear(date, comparison);
 
         public static bool IsWeekend(DateTime date)
         {
