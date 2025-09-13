@@ -129,5 +129,49 @@ namespace FpFilters.TypeFilters.BddTests
                 _ => ThenResultShouldBeFalse()
             );
         }
+
+        [Scenario]
+        public void Should_check_IsSameTypeAs_linq()
+        {
+            var isSameTypeAsInt = FpFilters.TypeFilters.TypeFilters.IsSameTypeAs(42);
+            Xunit.Assert.True(isSameTypeAsInt(123));
+            Xunit.Assert.False(isSameTypeAsInt("string"));
+            var isSameTypeAsStr = FpFilters.TypeFilters.TypeFilters.IsSameTypeAs("abc");
+            Xunit.Assert.True(isSameTypeAsStr("def"));
+            Xunit.Assert.False(isSameTypeAsStr(42));
+        }
+
+        [Scenario]
+        public void Should_check_IsNotSameTypeAs_linq()
+        {
+            var isNotSameTypeAsInt = FpFilters.TypeFilters.TypeFilters.IsNotSameTypeAs(42);
+            Xunit.Assert.False(isNotSameTypeAsInt(123));
+            Xunit.Assert.True(isNotSameTypeAsInt("string"));
+            var isNotSameTypeAsStr = FpFilters.TypeFilters.TypeFilters.IsNotSameTypeAs("abc");
+            Xunit.Assert.False(isNotSameTypeAsStr("def"));
+            Xunit.Assert.True(isNotSameTypeAsStr(42));
+        }
+
+        [Scenario]
+        public void Should_check_IsOfType_linq()
+        {
+            var isOfTypeInt = FpFilters.TypeFilters.TypeFilters.IsOfType(typeof(int));
+            Xunit.Assert.True(isOfTypeInt(42));
+            Xunit.Assert.False(isOfTypeInt("string"));
+            var isOfTypeStr = FpFilters.TypeFilters.TypeFilters.IsOfType(typeof(string));
+            Xunit.Assert.True(isOfTypeStr("abc"));
+            Xunit.Assert.False(isOfTypeStr(42));
+        }
+
+        [Scenario]
+        public void Should_check_IsNotOfType_linq()
+        {
+            var isNotOfTypeInt = FpFilters.TypeFilters.TypeFilters.IsNotOfType(typeof(int));
+            Xunit.Assert.False(isNotOfTypeInt(42));
+            Xunit.Assert.True(isNotOfTypeInt("string"));
+            var isNotOfTypeStr = FpFilters.TypeFilters.TypeFilters.IsNotOfType(typeof(string));
+            Xunit.Assert.False(isNotOfTypeStr("abc"));
+            Xunit.Assert.True(isNotOfTypeStr(42));
+        }
     }
 }

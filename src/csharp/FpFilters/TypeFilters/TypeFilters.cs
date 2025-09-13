@@ -52,15 +52,19 @@ namespace FpFilters.TypeFilters
 
         // Returns true if the argument is of the same type as comparison
         public static bool IsSameTypeAs<T>(object? arg, T comparison) => arg?.GetType() == comparison?.GetType();
+        public static Func<object?, bool> IsSameTypeAs<T>(T comparison) => arg => IsSameTypeAs(arg, comparison);
 
         // Returns true if the argument is not of the same type as comparison
         public static bool IsNotSameTypeAs<T>(object? arg, T comparison) => arg?.GetType() != comparison?.GetType();
+        public static Func<object?, bool> IsNotSameTypeAs<T>(T comparison) => arg => IsNotSameTypeAs(arg, comparison);
 
         // Returns true if the argument is of the specified type
         public static bool IsOfType(object? arg, Type type) => arg != null && arg.GetType() == type;
+        public static Func<object?, bool> IsOfType(Type type) => arg => IsOfType(arg, type);
 
         // Returns true if the argument is not of the specified type
         public static bool IsNotOfType(object? arg, Type type) => arg == null || arg.GetType() != type;
+        public static Func<object?, bool> IsNotOfType(Type type) => arg => IsNotOfType(arg, type);
 
         // Returns true if the argument is an instance of the specified class
         public static bool IsInstanceOf<T>(object? arg) => arg is T;
