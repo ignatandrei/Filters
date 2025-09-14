@@ -1,4 +1,4 @@
-namespace FpFilters.LengthFilters.BddTests
+namespace FpFilters.BddTests
 {
     [FeatureDescription("LengthFilters: BDD scenarios for length filter functions.")]
     public class LengthFiltersFeature : FeatureFixture
@@ -11,10 +11,10 @@ namespace FpFilters.LengthFilters.BddTests
 
         private void GivenString(string value) => arg = value;
         private void GivenComparison(int value) => comparison = value;
-        private void WhenIsLengthEqualTo() => result = FpFilters.LengthFilters.LengthFilters.IsLengthEqualTo(arg, comparison);
-        private void WhenIsLengthGreaterThan() => result = FpFilters.LengthFilters.LengthFilters.IsLengthGreaterThan(arg, comparison);
-        private void WhenIsLengthLessThan() => result = FpFilters.LengthFilters.LengthFilters.IsLengthLessThan(arg, comparison);
-        private void WhenIsLengthZero() => result = FpFilters.LengthFilters.LengthFilters.IsLengthZero(arg);
+        private void WhenIsLengthEqualTo() => result = FpFilters.LengthFilters.IsLengthEqualTo(arg, comparison);
+        private void WhenIsLengthGreaterThan() => result = FpFilters.LengthFilters.IsLengthGreaterThan(arg, comparison);
+        private void WhenIsLengthLessThan() => result = FpFilters.LengthFilters.IsLengthLessThan(arg, comparison);
+        private void WhenIsLengthZero() => result = FpFilters.LengthFilters.IsLengthZero(arg);
         private void ThenResultShouldBeTrue() => Xunit.Assert.True(result);
         private void ThenResultShouldBeFalse() => Xunit.Assert.False(result);
 
@@ -81,53 +81,53 @@ namespace FpFilters.LengthFilters.BddTests
         [Scenario]
         public void Should_check_empty_and_not_empty_for_various_types()
         {
-            Xunit.Assert.True(FpFilters.LengthFilters.LengthFilters.IsEmpty(""));
-            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.IsEmpty("abc"));
-            Xunit.Assert.True(FpFilters.LengthFilters.LengthFilters.IsEmpty(new int[] {}));
-            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.IsEmpty(new int[] { 1, 2 }));
-            Xunit.Assert.True(FpFilters.LengthFilters.LengthFilters.IsEmpty(new System.Collections.Generic.List<int>()));
-            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.IsEmpty(new System.Collections.Generic.List<int> { 1 }));
-            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.IsEmpty(null));
-            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.IsNotEmpty(""));
-            Xunit.Assert.True(FpFilters.LengthFilters.LengthFilters.IsNotEmpty("abc"));
+            Xunit.Assert.True(FpFilters.LengthFilters.IsEmpty(""));
+            Xunit.Assert.False(FpFilters.LengthFilters.IsEmpty("abc"));
+            Xunit.Assert.True(FpFilters.LengthFilters.IsEmpty(new int[] {}));
+            Xunit.Assert.False(FpFilters.LengthFilters.IsEmpty(new int[] { 1, 2 }));
+            Xunit.Assert.True(FpFilters.LengthFilters.IsEmpty(new System.Collections.Generic.List<int>()));
+            Xunit.Assert.False(FpFilters.LengthFilters.IsEmpty(new System.Collections.Generic.List<int> { 1 }));
+            Xunit.Assert.False(FpFilters.LengthFilters.IsEmpty(null));
+            Xunit.Assert.False(FpFilters.LengthFilters.IsNotEmpty(""));
+            Xunit.Assert.True(FpFilters.LengthFilters.IsNotEmpty("abc"));
         }
 
         [Scenario]
         public void Should_check_has_length_and_variants_for_various_types()
         {
-            Xunit.Assert.True(FpFilters.LengthFilters.LengthFilters.HasLength("abc", 3));
-            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.HasLength("abc", 2));
-            Xunit.Assert.True(FpFilters.LengthFilters.LengthFilters.HasLength(new int[] { 1, 2 }, 2));
-            Xunit.Assert.True(FpFilters.LengthFilters.LengthFilters.HasLengthMin("abc", 2));
-            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.HasLengthMin("a", 2));
-            Xunit.Assert.True(FpFilters.LengthFilters.LengthFilters.HasLengthMax("abc", 3));
-            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.HasLengthMax("abcd", 3));
-            Xunit.Assert.True(FpFilters.LengthFilters.LengthFilters.HasLengthBetween("abc", 2, 3));
-            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.HasLengthBetween("abc", 4, 5));
+            Xunit.Assert.True(FpFilters.LengthFilters.HasLength("abc", 3));
+            Xunit.Assert.False(FpFilters.LengthFilters.HasLength("abc", 2));
+            Xunit.Assert.True(FpFilters.LengthFilters.HasLength(new int[] { 1, 2 }, 2));
+            Xunit.Assert.True(FpFilters.LengthFilters.HasLengthMin("abc", 2));
+            Xunit.Assert.False(FpFilters.LengthFilters.HasLengthMin("a", 2));
+            Xunit.Assert.True(FpFilters.LengthFilters.HasLengthMax("abc", 3));
+            Xunit.Assert.False(FpFilters.LengthFilters.HasLengthMax("abcd", 3));
+            Xunit.Assert.True(FpFilters.LengthFilters.HasLengthBetween("abc", 2, 3));
+            Xunit.Assert.False(FpFilters.LengthFilters.HasLengthBetween("abc", 4, 5));
         }
 
         [Scenario]
         public void Should_check_has_not_length_and_variants()
         {
-            Xunit.Assert.True(FpFilters.LengthFilters.LengthFilters.HasNotLength("abc", 2));
-            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.HasNotLength("abc", 3));
-            Xunit.Assert.True(FpFilters.LengthFilters.LengthFilters.HasNotLengthMin("a", 2));
-            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.HasNotLengthMin("abc", 2));
-            Xunit.Assert.True(FpFilters.LengthFilters.LengthFilters.HasNotLengthMax("abcd", 3));
-            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.HasNotLengthMax("abc", 3));
-            Xunit.Assert.True(FpFilters.LengthFilters.LengthFilters.HasNotLengthBetween("abc", 4, 5));
-            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.HasNotLengthBetween("abc", 2, 3));
+            Xunit.Assert.True(FpFilters.LengthFilters.HasNotLength("abc", 2));
+            Xunit.Assert.False(FpFilters.LengthFilters.HasNotLength("abc", 3));
+            Xunit.Assert.True(FpFilters.LengthFilters.HasNotLengthMin("a", 2));
+            Xunit.Assert.False(FpFilters.LengthFilters.HasNotLengthMin("abc", 2));
+            Xunit.Assert.True(FpFilters.LengthFilters.HasNotLengthMax("abcd", 3));
+            Xunit.Assert.False(FpFilters.LengthFilters.HasNotLengthMax("abc", 3));
+            Xunit.Assert.True(FpFilters.LengthFilters.HasNotLengthBetween("abc", 4, 5));
+            Xunit.Assert.False(FpFilters.LengthFilters.HasNotLengthBetween("abc", 2, 3));
         }
 
         [Scenario]
         public void Should_check_length_property_on_custom_object()
         {
             var custom = new { Length = 5 };
-            Xunit.Assert.True(FpFilters.LengthFilters.LengthFilters.HasLength(custom, 5));
-            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.HasLength(custom, 4));
-            Xunit.Assert.True(FpFilters.LengthFilters.LengthFilters.HasLengthMin(custom, 5));
-            Xunit.Assert.True(FpFilters.LengthFilters.LengthFilters.HasLengthMax(custom, 5));
-            Xunit.Assert.True(FpFilters.LengthFilters.LengthFilters.HasLengthBetween(custom, 5, 5));
+            Xunit.Assert.True(FpFilters.LengthFilters.HasLength(custom, 5));
+            Xunit.Assert.False(FpFilters.LengthFilters.HasLength(custom, 4));
+            Xunit.Assert.True(FpFilters.LengthFilters.HasLengthMin(custom, 5));
+            Xunit.Assert.True(FpFilters.LengthFilters.HasLengthMax(custom, 5));
+            Xunit.Assert.True(FpFilters.LengthFilters.HasLengthBetween(custom, 5, 5));
         }
 
         [Scenario]
@@ -135,24 +135,24 @@ namespace FpFilters.LengthFilters.BddTests
         {
             object? nullObj = null;
             object noLength = new { Value = 42 };
-            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.HasLength(nullObj, 1));
-            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.HasLengthMin(nullObj, 1));
-            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.HasLengthMax(nullObj, 1));
-            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.HasLengthBetween(nullObj, 1, 2));
-            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.HasLength(noLength, 1));
-            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.HasLengthMin(noLength, 1));
-            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.HasLengthMax(noLength, 1));
-            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.HasLengthBetween(noLength, 1, 2));
+            Xunit.Assert.False(FpFilters.LengthFilters.HasLength(nullObj, 1));
+            Xunit.Assert.False(FpFilters.LengthFilters.HasLengthMin(nullObj, 1));
+            Xunit.Assert.False(FpFilters.LengthFilters.HasLengthMax(nullObj, 1));
+            Xunit.Assert.False(FpFilters.LengthFilters.HasLengthBetween(nullObj, 1, 2));
+            Xunit.Assert.False(FpFilters.LengthFilters.HasLength(noLength, 1));
+            Xunit.Assert.False(FpFilters.LengthFilters.HasLengthMin(noLength, 1));
+            Xunit.Assert.False(FpFilters.LengthFilters.HasLengthMax(noLength, 1));
+            Xunit.Assert.False(FpFilters.LengthFilters.HasLengthBetween(noLength, 1, 2));
         }
 
         [Scenario]
         public void Should_check_length_methods_with_null_string()
         {
             string? nullStr = null;
-            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.IsLengthEqualTo(nullStr, 0));
-            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.IsLengthGreaterThan(nullStr, 0));
-            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.IsLengthLessThan(nullStr, 0));
-            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.IsLengthZero(nullStr));
+            Xunit.Assert.False(FpFilters.LengthFilters.IsLengthEqualTo(nullStr, 0));
+            Xunit.Assert.False(FpFilters.LengthFilters.IsLengthGreaterThan(nullStr, 0));
+            Xunit.Assert.False(FpFilters.LengthFilters.IsLengthLessThan(nullStr, 0));
+            Xunit.Assert.False(FpFilters.LengthFilters.IsLengthZero(nullStr));
         }
 
         [Scenario]
@@ -164,24 +164,24 @@ namespace FpFilters.LengthFilters.BddTests
             var objectWithoutLength = new { Name = "test" };
             
             // Test IsEmpty with reflection path
-            Xunit.Assert.True(FpFilters.LengthFilters.LengthFilters.IsEmpty(customEmptyLength));
-            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.IsEmpty(customNonZeroLength));
-            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.IsEmpty(objectWithoutLength));
+            Xunit.Assert.True(FpFilters.LengthFilters.IsEmpty(customEmptyLength));
+            Xunit.Assert.False(FpFilters.LengthFilters.IsEmpty(customNonZeroLength));
+            Xunit.Assert.False(FpFilters.LengthFilters.IsEmpty(objectWithoutLength));
             
             // Test HasLength with reflection path
-            Xunit.Assert.True(FpFilters.LengthFilters.LengthFilters.HasLength(customNonZeroLength, 3));
-            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.HasLength(customNonZeroLength, 2));
-            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.HasLength(objectWithoutLength, 1));
+            Xunit.Assert.True(FpFilters.LengthFilters.HasLength(customNonZeroLength, 3));
+            Xunit.Assert.False(FpFilters.LengthFilters.HasLength(customNonZeroLength, 2));
+            Xunit.Assert.False(FpFilters.LengthFilters.HasLength(objectWithoutLength, 1));
             
             // Test HasLengthMin with reflection path
-            Xunit.Assert.True(FpFilters.LengthFilters.LengthFilters.HasLengthMin(customNonZeroLength, 2));
-            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.HasLengthMin(customNonZeroLength, 4));
-            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.HasLengthMin(objectWithoutLength, 1));
+            Xunit.Assert.True(FpFilters.LengthFilters.HasLengthMin(customNonZeroLength, 2));
+            Xunit.Assert.False(FpFilters.LengthFilters.HasLengthMin(customNonZeroLength, 4));
+            Xunit.Assert.False(FpFilters.LengthFilters.HasLengthMin(objectWithoutLength, 1));
             
             // Test HasLengthMax with reflection path
-            Xunit.Assert.True(FpFilters.LengthFilters.LengthFilters.HasLengthMax(customNonZeroLength, 4));
-            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.HasLengthMax(customNonZeroLength, 2));
-            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.HasLengthMax(objectWithoutLength, 5));
+            Xunit.Assert.True(FpFilters.LengthFilters.HasLengthMax(customNonZeroLength, 4));
+            Xunit.Assert.False(FpFilters.LengthFilters.HasLengthMax(customNonZeroLength, 2));
+            Xunit.Assert.False(FpFilters.LengthFilters.HasLengthMax(objectWithoutLength, 5));
         }
 
         [Scenario]
@@ -192,21 +192,21 @@ namespace FpFilters.LengthFilters.BddTests
             var array = new int[] { 1, 2, 3, 4 };
             
             // Test HasLengthMax with ICollection (List)
-            Xunit.Assert.True(FpFilters.LengthFilters.LengthFilters.HasLengthMax(list, 3));
-            Xunit.Assert.True(FpFilters.LengthFilters.LengthFilters.HasLengthMax(list, 5));
-            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.HasLengthMax(list, 2));
+            Xunit.Assert.True(FpFilters.LengthFilters.HasLengthMax(list, 3));
+            Xunit.Assert.True(FpFilters.LengthFilters.HasLengthMax(list, 5));
+            Xunit.Assert.False(FpFilters.LengthFilters.HasLengthMax(list, 2));
             
             // Test HasLengthMax with ICollection (Array)
-            Xunit.Assert.True(FpFilters.LengthFilters.LengthFilters.HasLengthMax(array, 4));
-            Xunit.Assert.True(FpFilters.LengthFilters.LengthFilters.HasLengthMax(array, 6));
-            Xunit.Assert.False(FpFilters.LengthFilters.LengthFilters.HasLengthMax(array, 3));
+            Xunit.Assert.True(FpFilters.LengthFilters.HasLengthMax(array, 4));
+            Xunit.Assert.True(FpFilters.LengthFilters.HasLengthMax(array, 6));
+            Xunit.Assert.False(FpFilters.LengthFilters.HasLengthMax(array, 3));
         }
 
         [Scenario]
         public void Should_check_HasLength_linq()
         {
             Runner.RunScenario(
-                _ => GivenLinqFilter(FpFilters.LengthFilters.LengthFilters.HasLength(3)),
+                _ => GivenLinqFilter(FpFilters.LengthFilters.HasLength(3)),
                 _ => GivenString("abc"),
                 _ => WhenApplyLinqFilter(),
                 _ => ThenResultShouldBeTrue(),
@@ -220,7 +220,7 @@ namespace FpFilters.LengthFilters.BddTests
         public void Should_check_HasLengthMin_linq()
         {
             Runner.RunScenario(
-                _ => GivenLinqFilter(FpFilters.LengthFilters.LengthFilters.HasLengthMin(2)),
+                _ => GivenLinqFilter(FpFilters.LengthFilters.HasLengthMin(2)),
                 _ => GivenString("abc"),
                 _ => WhenApplyLinqFilter(),
                 _ => ThenResultShouldBeTrue(),
@@ -234,7 +234,7 @@ namespace FpFilters.LengthFilters.BddTests
         public void Should_check_HasLengthMax_linq()
         {
             Runner.RunScenario(
-                _ => GivenLinqFilter(FpFilters.LengthFilters.LengthFilters.HasLengthMax(3)),
+                _ => GivenLinqFilter(FpFilters.LengthFilters.HasLengthMax(3)),
                 _ => GivenString("abc"),
                 _ => WhenApplyLinqFilter(),
                 _ => ThenResultShouldBeTrue(),
@@ -248,7 +248,7 @@ namespace FpFilters.LengthFilters.BddTests
         public void Should_check_HasLengthBetween_linq()
         {
             Runner.RunScenario(
-                _ => GivenLinqFilter(FpFilters.LengthFilters.LengthFilters.HasLengthBetween(2, 3)),
+                _ => GivenLinqFilter(FpFilters.LengthFilters.HasLengthBetween(2, 3)),
                 _ => GivenString("abc"),
                 _ => WhenApplyLinqFilter(),
                 _ => ThenResultShouldBeTrue(),
@@ -265,7 +265,7 @@ namespace FpFilters.LengthFilters.BddTests
         public void Should_check_HasNotLength_linq()
         {
             Runner.RunScenario(
-                _ => GivenLinqFilter(FpFilters.LengthFilters.LengthFilters.HasNotLength(2)),
+                _ => GivenLinqFilter(FpFilters.LengthFilters.HasNotLength(2)),
                 _ => GivenString("abc"),
                 _ => WhenApplyLinqFilter(),
                 _ => ThenResultShouldBeTrue(),
@@ -279,7 +279,7 @@ namespace FpFilters.LengthFilters.BddTests
         public void Should_check_HasNotLengthMin_linq()
         {
             Runner.RunScenario(
-                _ => GivenLinqFilter(FpFilters.LengthFilters.LengthFilters.HasNotLengthMin(2)),
+                _ => GivenLinqFilter(FpFilters.LengthFilters.HasNotLengthMin(2)),
                 _ => GivenString("a"),
                 _ => WhenApplyLinqFilter(),
                 _ => ThenResultShouldBeTrue(),
@@ -293,7 +293,7 @@ namespace FpFilters.LengthFilters.BddTests
         public void Should_check_HasNotLengthMax_linq()
         {
             Runner.RunScenario(
-                _ => GivenLinqFilter(FpFilters.LengthFilters.LengthFilters.HasNotLengthMax(3)),
+                _ => GivenLinqFilter(FpFilters.LengthFilters.HasNotLengthMax(3)),
                 _ => GivenString("abcd"),
                 _ => WhenApplyLinqFilter(),
                 _ => ThenResultShouldBeTrue(),
@@ -307,7 +307,7 @@ namespace FpFilters.LengthFilters.BddTests
         public void Should_check_HasNotLengthBetween_linq()
         {
             Runner.RunScenario(
-                _ => GivenLinqFilter(FpFilters.LengthFilters.LengthFilters.HasNotLengthBetween(2, 3)),
+                _ => GivenLinqFilter(FpFilters.LengthFilters.HasNotLengthBetween(2, 3)),
                 _ => GivenString("a"),
                 _ => WhenApplyLinqFilter(),
                 _ => ThenResultShouldBeTrue(),
@@ -321,7 +321,7 @@ namespace FpFilters.LengthFilters.BddTests
         public void Should_check_IsLengthEqualTo_linq()
         {
             Runner.RunScenario(
-                _ => GivenLinqStringFilter(FpFilters.LengthFilters.LengthFilters.IsLengthEqualTo(3)),
+                _ => GivenLinqStringFilter(FpFilters.LengthFilters.IsLengthEqualTo(3)),
                 _ => GivenString("abc"),
                 _ => WhenApplyLinqStringFilter(),
                 _ => ThenResultShouldBeTrue(),
@@ -335,7 +335,7 @@ namespace FpFilters.LengthFilters.BddTests
         public void Should_check_IsLengthGreaterThan_linq()
         {
             Runner.RunScenario(
-                _ => GivenLinqStringFilter(FpFilters.LengthFilters.LengthFilters.IsLengthGreaterThan(2)),
+                _ => GivenLinqStringFilter(FpFilters.LengthFilters.IsLengthGreaterThan(2)),
                 _ => GivenString("abc"),
                 _ => WhenApplyLinqStringFilter(),
                 _ => ThenResultShouldBeTrue(),
@@ -349,7 +349,7 @@ namespace FpFilters.LengthFilters.BddTests
         public void Should_check_IsLengthLessThan_linq()
         {
             Runner.RunScenario(
-                _ => GivenLinqStringFilter(FpFilters.LengthFilters.LengthFilters.IsLengthLessThan(3)),
+                _ => GivenLinqStringFilter(FpFilters.LengthFilters.IsLengthLessThan(3)),
                 _ => GivenString("ab"),
                 _ => WhenApplyLinqStringFilter(),
                 _ => ThenResultShouldBeTrue(),
