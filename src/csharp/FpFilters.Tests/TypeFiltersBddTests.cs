@@ -1,4 +1,4 @@
-namespace FpFilters.TypeFilters.BddTests
+namespace FpFilters.BddTests
 {
     [FeatureDescription("TypeFilters: BDD scenarios for type filter functions.")]
     public class TypeFiltersFeature : FeatureFixture
@@ -9,14 +9,14 @@ namespace FpFilters.TypeFilters.BddTests
 
         private void GivenArgument(object? value) => arg = value;
         private void GivenComparison(object? value) => comparison = value;
-        private void WhenIsUndefined() => result = FpFilters.TypeFilters.TypeFilters.IsUndefined(arg);
-        private void WhenIsString() => result = FpFilters.TypeFilters.TypeFilters.IsString(arg);
-        private void WhenIsNumber() => result = FpFilters.TypeFilters.TypeFilters.IsNumber(arg);
-        private void WhenIsObject() => result = FpFilters.TypeFilters.TypeFilters.IsObject(arg);
-        private void WhenIsNull() => result = FpFilters.TypeFilters.TypeFilters.IsNull(arg);
-        private void WhenIsBoolean() => result = FpFilters.TypeFilters.TypeFilters.IsBoolean(arg);
-        private void WhenIsDate() => result = FpFilters.TypeFilters.TypeFilters.IsDate(arg);
-        private void WhenIsArray() => result = FpFilters.TypeFilters.TypeFilters.IsArray(arg);
+        private void WhenIsUndefined() => result = FpFilters.TypeFilters.IsUndefined(arg);
+        private void WhenIsString() => result = FpFilters.TypeFilters.IsString(arg);
+        private void WhenIsNumber() => result = FpFilters.TypeFilters.IsNumber(arg);
+        private void WhenIsObject() => result = FpFilters.TypeFilters.IsObject(arg);
+        private void WhenIsNull() => result = FpFilters.TypeFilters.IsNull(arg);
+        private void WhenIsBoolean() => result = FpFilters.TypeFilters.IsBoolean(arg);
+        private void WhenIsDate() => result = FpFilters.TypeFilters.IsDate(arg);
+        private void WhenIsArray() => result = FpFilters.TypeFilters.IsArray(arg);
         private void ThenResultShouldBeTrue() => Xunit.Assert.True(result);
         private void ThenResultShouldBeFalse() => Xunit.Assert.False(result);
 
@@ -133,10 +133,10 @@ namespace FpFilters.TypeFilters.BddTests
         [Scenario]
         public void Should_check_IsSameTypeAs_linq()
         {
-            var isSameTypeAsInt = FpFilters.TypeFilters.TypeFilters.IsSameTypeAs(42);
+            var isSameTypeAsInt = FpFilters.TypeFilters.IsSameTypeAs(42);
             Xunit.Assert.True(isSameTypeAsInt(123));
             Xunit.Assert.False(isSameTypeAsInt("string"));
-            var isSameTypeAsStr = FpFilters.TypeFilters.TypeFilters.IsSameTypeAs("abc");
+            var isSameTypeAsStr = FpFilters.TypeFilters.IsSameTypeAs("abc");
             Xunit.Assert.True(isSameTypeAsStr("def"));
             Xunit.Assert.False(isSameTypeAsStr(42));
         }
@@ -144,10 +144,10 @@ namespace FpFilters.TypeFilters.BddTests
         [Scenario]
         public void Should_check_IsNotSameTypeAs_linq()
         {
-            var isNotSameTypeAsInt = FpFilters.TypeFilters.TypeFilters.IsNotSameTypeAs(42);
+            var isNotSameTypeAsInt = FpFilters.TypeFilters.IsNotSameTypeAs(42);
             Xunit.Assert.False(isNotSameTypeAsInt(123));
             Xunit.Assert.True(isNotSameTypeAsInt("string"));
-            var isNotSameTypeAsStr = FpFilters.TypeFilters.TypeFilters.IsNotSameTypeAs("abc");
+            var isNotSameTypeAsStr = FpFilters.TypeFilters.IsNotSameTypeAs("abc");
             Xunit.Assert.False(isNotSameTypeAsStr("def"));
             Xunit.Assert.True(isNotSameTypeAsStr(42));
         }
@@ -155,10 +155,10 @@ namespace FpFilters.TypeFilters.BddTests
         [Scenario]
         public void Should_check_IsOfType_linq()
         {
-            var isOfTypeInt = FpFilters.TypeFilters.TypeFilters.IsOfType(typeof(int));
+            var isOfTypeInt = FpFilters.TypeFilters.IsOfType(typeof(int));
             Xunit.Assert.True(isOfTypeInt(42));
             Xunit.Assert.False(isOfTypeInt("string"));
-            var isOfTypeStr = FpFilters.TypeFilters.TypeFilters.IsOfType(typeof(string));
+            var isOfTypeStr = FpFilters.TypeFilters.IsOfType(typeof(string));
             Xunit.Assert.True(isOfTypeStr("abc"));
             Xunit.Assert.False(isOfTypeStr(42));
         }
@@ -166,10 +166,10 @@ namespace FpFilters.TypeFilters.BddTests
         [Scenario]
         public void Should_check_IsNotOfType_linq()
         {
-            var isNotOfTypeInt = FpFilters.TypeFilters.TypeFilters.IsNotOfType(typeof(int));
+            var isNotOfTypeInt = FpFilters.TypeFilters.IsNotOfType(typeof(int));
             Xunit.Assert.False(isNotOfTypeInt(42));
             Xunit.Assert.True(isNotOfTypeInt("string"));
-            var isNotOfTypeStr = FpFilters.TypeFilters.TypeFilters.IsNotOfType(typeof(string));
+            var isNotOfTypeStr = FpFilters.TypeFilters.IsNotOfType(typeof(string));
             Xunit.Assert.False(isNotOfTypeStr("abc"));
             Xunit.Assert.True(isNotOfTypeStr(42));
         }
