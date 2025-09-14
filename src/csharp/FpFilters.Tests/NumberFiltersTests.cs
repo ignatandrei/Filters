@@ -1,4 +1,5 @@
-namespace FpFilters.NumberFilters.Tests
+using FpFilters;
+namespace FpFilters.Tests
 {
     public class NumberFiltersTests
     {

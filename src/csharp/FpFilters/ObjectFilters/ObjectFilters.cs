@@ -1,4 +1,4 @@
-namespace FpFilters.ObjectFilters
+namespace FpFilters
 {
     public static class ObjectFilters
     {

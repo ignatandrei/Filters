@@ -1,4 +1,4 @@
-namespace FpFilters.PositionFilters.BddTests
+namespace FpFilters.BddTests
 {
     [FeatureDescription("PositionFilters: BDD scenarios for position filter functions.")]
     public class PositionFiltersFeature : FeatureFixture
@@ -9,9 +9,9 @@ namespace FpFilters.PositionFilters.BddTests
 
         private void GivenPosition(int value) => arg = value;
         private void GivenComparison(int value) => comparison = value;
-        private void WhenIsFirst() => result = FpFilters.PositionFilters.PositionFilters.IsFirst(arg);
-        private void WhenIsLast(int length) => result = FpFilters.PositionFilters.PositionFilters.IsLast(arg, length);
-        private void WhenIsMiddle(int length) => result = FpFilters.PositionFilters.PositionFilters.IsMiddle(arg, length);
+        private void WhenIsFirst() => result = FpFilters.PositionFilters.IsFirst(arg);
+        private void WhenIsLast(int length) => result = FpFilters.PositionFilters.IsLast(arg, length);
+        private void WhenIsMiddle(int length) => result = FpFilters.PositionFilters.IsMiddle(arg, length);
         private void ThenResultShouldBeTrue() => Xunit.Assert.True(result);
         private void ThenResultShouldBeFalse() => Xunit.Assert.False(result);
 

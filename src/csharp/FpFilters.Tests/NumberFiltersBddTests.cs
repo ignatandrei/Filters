@@ -1,4 +1,5 @@
-namespace FpFilters.NumberFilters.BddTests
+using FpFilters;
+namespace FpFilters.BddTests
 {
 	[FeatureDescription("NumberFilters: BDD scenarios for number filter functions.")]
 	public class NumberFiltersFeature : FeatureFixture
@@ -11,29 +12,29 @@ namespace FpFilters.NumberFilters.BddTests
 		private void GivenNumber(double value) => arg = value;
 		private void GivenInt(int value) => intArg = value;
 		private void GivenComparison(double value) => comparison = value;
-		private void WhenIsEven() => filtered = FpFilters.NumberFilters.NumberFilters.IsEven(intArg);
-		private void WhenIsOdd() => filtered = FpFilters.NumberFilters.NumberFilters.IsOdd(intArg);
-		private void WhenIsPositive() => filtered = FpFilters.NumberFilters.NumberFilters.IsPositive(arg);
-		private void WhenIsNegative() => filtered = FpFilters.NumberFilters.NumberFilters.IsNegative(arg);
-		private void WhenIsZero() => filtered = FpFilters.NumberFilters.NumberFilters.IsZero(arg);
-		private void WhenIsGreaterThan() => filtered = FpFilters.NumberFilters.NumberFilters.IsGreaterThan(arg, comparison);
-		private void WhenIsLessThan() => filtered = FpFilters.NumberFilters.NumberFilters.IsLowerThan(arg, comparison);
-		private void WhenIsEqualTo() => filtered = FpFilters.NumberFilters.NumberFilters.IsLowerOrEqualTo(arg, comparison) && FpFilters.NumberFilters.NumberFilters.IsGreaterOrEqualTo(arg, comparison);
-		private void WhenIsNotEqualTo() => filtered = !(FpFilters.NumberFilters.NumberFilters.IsLowerOrEqualTo(arg, comparison) && FpFilters.NumberFilters.NumberFilters.IsGreaterOrEqualTo(arg, comparison));
+		private void WhenIsEven() => filtered = NumberFilters.IsEven(intArg);
+		private void WhenIsOdd() => filtered = NumberFilters.IsOdd(intArg);
+		private void WhenIsPositive() => filtered = NumberFilters.IsPositive(arg);
+		private void WhenIsNegative() => filtered = NumberFilters.IsNegative(arg);
+		private void WhenIsZero() => filtered = NumberFilters.IsZero(arg);
+		private void WhenIsGreaterThan() => filtered = NumberFilters.IsGreaterThan(arg, comparison);
+		private void WhenIsLessThan() => filtered = NumberFilters.IsLowerThan(arg, comparison);
+		private void WhenIsEqualTo() => filtered = NumberFilters.IsLowerOrEqualTo(arg, comparison) && NumberFilters.IsGreaterOrEqualTo(arg, comparison);
+		private void WhenIsNotEqualTo() => filtered = !(NumberFilters.IsLowerOrEqualTo(arg, comparison) && NumberFilters.IsGreaterOrEqualTo(arg, comparison));
 		private void WhenIsFinite() => filtered = !double.IsInfinity(arg) && !double.IsNaN(arg);
 		private void WhenIsInfinite() => filtered = double.IsInfinity(arg);
 		private void WhenIsNaN() => filtered = double.IsNaN(arg);
 		private void ThenResultShouldBeTrue() => Xunit.Assert.True(filtered);
 		private void ThenResultShouldBeFalse() => Xunit.Assert.False(filtered);
-		private void WhenIsMultipleOfLinq() => filtered = FpFilters.NumberFilters.NumberFilters.IsMultipleOf(3)(intArg);
-		private void WhenIsLowerThanLinq() => filtered = FpFilters.NumberFilters.NumberFilters.IsLowerThan(comparison)(arg);
-		private void WhenIsLowerOrEqualToLinq() => filtered = FpFilters.NumberFilters.NumberFilters.IsLowerOrEqualTo(comparison)(arg);
-		private void WhenIsGreaterThanLinq() => filtered = FpFilters.NumberFilters.NumberFilters.IsGreaterThan(comparison)(arg);
-		private void WhenIsGreaterOrEqualToLinq() => filtered = FpFilters.NumberFilters.NumberFilters.IsGreaterOrEqualTo(comparison)(arg);
-		private void WhenIsBetweenExcludingMinLinq(double min, double max) => filtered = FpFilters.NumberFilters.NumberFilters.IsBetweenExcludingMin(min, max)(arg);
-		private void WhenIsBetweenExcludingMaxLinq(double min, double max) => filtered = FpFilters.NumberFilters.NumberFilters.IsBetweenExcludingMax(min, max)(arg);
-		private void WhenIsBetweenExcludingBoundariesLinq(double min, double max) => filtered = FpFilters.NumberFilters.NumberFilters.IsBetweenExcludingBoundaries(min, max)(arg);
-		private void WhenIsBetweenLinq(double min, double max) => filtered = FpFilters.NumberFilters.NumberFilters.IsBetween(min, max)(arg);
+		private void WhenIsMultipleOfLinq() => filtered = NumberFilters.IsMultipleOf(3)(intArg);
+		private void WhenIsLowerThanLinq() => filtered = NumberFilters.IsLowerThan(comparison)(arg);
+		private void WhenIsLowerOrEqualToLinq() => filtered = NumberFilters.IsLowerOrEqualTo(comparison)(arg);
+		private void WhenIsGreaterThanLinq() => filtered = NumberFilters.IsGreaterThan(comparison)(arg);
+		private void WhenIsGreaterOrEqualToLinq() => filtered = NumberFilters.IsGreaterOrEqualTo(comparison)(arg);
+		private void WhenIsBetweenExcludingMinLinq(double min, double max) => filtered = NumberFilters.IsBetweenExcludingMin(min, max)(arg);
+		private void WhenIsBetweenExcludingMaxLinq(double min, double max) => filtered = NumberFilters.IsBetweenExcludingMax(min, max)(arg);
+		private void WhenIsBetweenExcludingBoundariesLinq(double min, double max) => filtered = NumberFilters.IsBetweenExcludingBoundaries(min, max)(arg);
+		private void WhenIsBetweenLinq(double min, double max) => filtered = NumberFilters.IsBetween(min, max)(arg);
 
 		[Scenario]
 		public void Should_check_if_number_is_even()
@@ -334,7 +335,7 @@ namespace FpFilters.NumberFilters.BddTests
 		public void Should_filter_collection_with_IsBetweenExcludingMin_Linq_edge_cases()
 		{
 			var numbers = new[] { 2.0, 3.0, 4.0, 5.0 };
-			var result = numbers.Where(FpFilters.NumberFilters.NumberFilters.IsBetweenExcludingMin(3.0, 5.0)).ToArray();
+			var result = numbers.Where(NumberFilters.IsBetweenExcludingMin(3.0, 5.0)).ToArray();
 			Xunit.Assert.Equal(new[] { 4.0, 5.0 }, result);
 		}
 
@@ -342,7 +343,7 @@ namespace FpFilters.NumberFilters.BddTests
 		public void Should_filter_collection_with_IsBetweenExcludingMax_Linq_edge_cases()
 		{
 			var numbers = new[] { 2.0, 3.0, 4.0, 5.0 };
-			var result = numbers.Where(FpFilters.NumberFilters.NumberFilters.IsBetweenExcludingMax(3.0, 5.0)).ToArray();
+			var result = numbers.Where(NumberFilters.IsBetweenExcludingMax(3.0, 5.0)).ToArray();
 			Xunit.Assert.Equal(new[] { 3.0, 4.0 }, result);
 		}
 
@@ -350,7 +351,7 @@ namespace FpFilters.NumberFilters.BddTests
 		public void Should_filter_collection_with_IsBetweenExcludingBoundaries_Linq_edge_cases()
 		{
 			var numbers = new[] { 2.0, 3.0, 4.0, 5.0 };
-			var result = numbers.Where(FpFilters.NumberFilters.NumberFilters.IsBetweenExcludingBoundaries(3.0, 5.0)).ToArray();
+			var result = numbers.Where(NumberFilters.IsBetweenExcludingBoundaries(3.0, 5.0)).ToArray();
 			Xunit.Assert.Equal(new[] { 4.0 }, result);
 		}
 
@@ -358,7 +359,7 @@ namespace FpFilters.NumberFilters.BddTests
 		public void Should_filter_collection_with_IsBetween_Linq_edge_cases()
 		{
 			var numbers = new[] { 2.0, 3.0, 4.0, 5.0, 6.0 };
-			var result = numbers.Where(FpFilters.NumberFilters.NumberFilters.IsBetween(3.0, 5.0)).ToArray();
+			var result = numbers.Where(NumberFilters.IsBetween(3.0, 5.0)).ToArray();
 			Xunit.Assert.Equal(new[] { 3.0, 4.0, 5.0 }, result);
 		}
 
@@ -366,7 +367,7 @@ namespace FpFilters.NumberFilters.BddTests
 		public void Should_filter_collection_with_IsLowerThan_Linq_all_false()
 		{
 			var numbers = new[] { 3.0, 4.0, 5.0 };
-			var result = numbers.Where(FpFilters.NumberFilters.NumberFilters.IsLowerThan(2.0)).ToArray();
+			var result = numbers.Where(NumberFilters.IsLowerThan(2.0)).ToArray();
 			Xunit.Assert.Empty(result);
 		}
 
@@ -374,7 +375,7 @@ namespace FpFilters.NumberFilters.BddTests
 		public void Should_filter_collection_with_IsGreaterThan_Linq_all_true()
 		{
 			var numbers = new[] { 4.0, 5.0, 6.0 };
-			var result = numbers.Where(FpFilters.NumberFilters.NumberFilters.IsGreaterThan(3.0)).ToArray();
+			var result = numbers.Where(NumberFilters.IsGreaterThan(3.0)).ToArray();
 			Xunit.Assert.Equal(new[] { 4.0, 5.0, 6.0 }, result);
 		}
 
@@ -382,7 +383,7 @@ namespace FpFilters.NumberFilters.BddTests
 		public void Should_filter_collection_with_IsMultipleOf_Linq_none()
 		{
 			var numbers = new[] { 2, 4, 5 };
-			var result = numbers.Where(FpFilters.NumberFilters.NumberFilters.IsMultipleOf(3)).ToArray();
+			var result = numbers.Where(NumberFilters.IsMultipleOf(3)).ToArray();
 			Xunit.Assert.Empty(result);
 		}
 	}

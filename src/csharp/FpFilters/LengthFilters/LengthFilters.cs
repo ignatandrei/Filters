@@ -1,4 +1,4 @@
-namespace FpFilters.LengthFilters
+namespace FpFilters
 {
     public static class LengthFilters
     {

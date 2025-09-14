@@ -1,4 +1,4 @@
-namespace FpFilters.NumberFilters
+namespace FpFilters
 {
     /// <summary>
     /// Provides a set of static methods for filtering and comparing numbers.

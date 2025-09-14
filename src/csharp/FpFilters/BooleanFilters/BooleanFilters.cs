@@ -1,4 +1,4 @@
-namespace FpFilters.BooleanFilters
+namespace FpFilters
 {
     public static class BooleanFilters
     {
