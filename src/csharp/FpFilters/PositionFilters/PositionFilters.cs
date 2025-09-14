@@ -1,4 +1,4 @@
-namespace FpFilters.PositionFilters
+namespace FpFilters
 {
     public static class PositionFilters
     {
