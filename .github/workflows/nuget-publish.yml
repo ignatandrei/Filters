@@ -15,11 +15,12 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '9.0.x'
+          cache: true
       - name: Restore dependencies
         run: dotnet restore src/csharp/FpFilters/FpFilters.csproj
       - name: Build
         run: dotnet build src/csharp/FpFilters/FpFilters.csproj --configuration Release --no-restore
       - name: Pack
-        run: dotnet pack src/csharp/FpFilters/FpFilters.csproj --configuration Release --no-build --output ./nupkg
+        run: dotnet pack src/csharp/FpFilters/FpFilters.csproj -p:Version=${GITHUB_REF_NAME#v} --configuration Release --no-build --output ./nupkg
       - name: Publish to NuGet
         run: dotnet nuget push ./nupkg/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
