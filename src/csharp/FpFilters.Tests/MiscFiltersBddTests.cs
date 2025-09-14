@@ -1,4 +1,4 @@
-namespace FpFilters.MiscFilters.BddTests
+namespace FpFilters.BddTests
 {
     [FeatureDescription("MiscFilters: BDD scenarios for miscellaneous filter functions.")]
     public class MiscFiltersFeature : FeatureFixture
@@ -7,8 +7,8 @@ namespace FpFilters.MiscFilters.BddTests
         private bool result;
 
         private void GivenValue(object? value) => arg = value;
-        private void WhenIsNullOrDefault() => result = FpFilters.MiscFilters.MiscFilters.IsNullOrDefault(arg);
-        private void WhenIsNotNullOrDefault() => result = FpFilters.MiscFilters.MiscFilters.IsNotNullOrDefault(arg);
+        private void WhenIsNullOrDefault() => result = FpFilters.MiscFilters.IsNullOrDefault(arg);
+        private void WhenIsNotNullOrDefault() => result = FpFilters.MiscFilters.IsNotNullOrDefault(arg);
         private void ThenResultShouldBeTrue() => Xunit.Assert.True(result);
         private void ThenResultShouldBeFalse() => Xunit.Assert.False(result);
 
@@ -48,10 +48,10 @@ namespace FpFilters.MiscFilters.BddTests
         public void Should_check_Is_linq()
         {
             // Use local variables for generic delegate and argument
-            var is42 = FpFilters.MiscFilters.MiscFilters.Is(42);
+            var is42 = FpFilters.MiscFilters.Is(42);
             Xunit.Assert.True(is42(42));
             Xunit.Assert.False(is42(43));
-            var isStr = FpFilters.MiscFilters.MiscFilters.Is("abc");
+            var isStr = FpFilters.MiscFilters.Is("abc");
             Xunit.Assert.True(isStr("abc"));
             Xunit.Assert.False(isStr("def"));
         }
@@ -60,10 +60,10 @@ namespace FpFilters.MiscFilters.BddTests
         public void Should_check_IsNot_linq()
         {
             // Use local variables for generic delegate and argument
-            var isNot42 = FpFilters.MiscFilters.MiscFilters.IsNot(42);
+            var isNot42 = FpFilters.MiscFilters.IsNot(42);
             Xunit.Assert.True(isNot42(43));
             Xunit.Assert.False(isNot42(42));
-            var isNotStr = FpFilters.MiscFilters.MiscFilters.IsNot("abc");
+            var isNotStr = FpFilters.MiscFilters.IsNot("abc");
             Xunit.Assert.True(isNotStr("def"));
             Xunit.Assert.False(isNotStr("abc"));
         }

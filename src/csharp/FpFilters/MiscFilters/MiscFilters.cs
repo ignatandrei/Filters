@@ -1,4 +1,4 @@
-namespace FpFilters.MiscFilters
+namespace FpFilters
 {
     public static class MiscFilters
     {
