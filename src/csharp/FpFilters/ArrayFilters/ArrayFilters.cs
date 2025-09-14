@@ -1,4 +1,4 @@
-namespace FpFilters.ArrayFilters
+namespace FpFilters
 {
     public static class ArrayFilters
     {

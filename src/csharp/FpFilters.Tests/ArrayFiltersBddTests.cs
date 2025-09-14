@@ -1,4 +1,4 @@
-namespace FpFilters.ArrayFilters.BddTests
+namespace FpFilters.BddTests
 {
     [FeatureDescription(
         "ArrayFilters: BDD scenarios for array filter functions.")]
@@ -8,12 +8,12 @@ namespace FpFilters.ArrayFilters.BddTests
         private bool result;
 
         private void GivenArray(params int[] values) => arr = values;
-        private void WhenIsIncludedIn(int value) => result = FpFilters.ArrayFilters.ArrayFilters.IsIncludedIn(value, arr);
-        private void WhenIsIncludedIn_Linq(int value) => result = FpFilters.ArrayFilters.ArrayFilters.IsIncludedIn(arr)(value);
-        private void WhenIsNotIncludedIn(int value) => result = FpFilters.ArrayFilters.ArrayFilters.IsNotIncludedIn(value, arr);
-        private void WhenIsNotIncludedIn_Linq(int value) => result = FpFilters.ArrayFilters.ArrayFilters.IsNotIncludedIn(arr)(value);
-        private void WhenEveryElement(Func<int, bool> condition) => result = FpFilters.ArrayFilters.ArrayFilters.EveryElement(arr, condition);
-        private void WhenEveryElement_Linq(Func<int, bool> condition) => result = FpFilters.ArrayFilters.ArrayFilters.EveryElement(condition)(arr);
+        private void WhenIsIncludedIn(int value) => result = FpFilters.ArrayFilters.IsIncludedIn(value, arr);
+        private void WhenIsIncludedIn_Linq(int value) => result = FpFilters.ArrayFilters.IsIncludedIn(arr)(value);
+        private void WhenIsNotIncludedIn(int value) => result = FpFilters.ArrayFilters.IsNotIncludedIn(value, arr);
+        private void WhenIsNotIncludedIn_Linq(int value) => result = FpFilters.ArrayFilters.IsNotIncludedIn(arr)(value);
+        private void WhenEveryElement(Func<int, bool> condition) => result = FpFilters.ArrayFilters.EveryElement(arr, condition);
+        private void WhenEveryElement_Linq(Func<int, bool> condition) => result = FpFilters.ArrayFilters.EveryElement(condition)(arr);
         private void ThenResultShouldBeTrue() => Xunit.Assert.True(result);
         private void ThenResultShouldBeFalse() => Xunit.Assert.False(result);
 
