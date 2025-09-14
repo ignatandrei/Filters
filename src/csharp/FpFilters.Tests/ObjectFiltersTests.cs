@@ -1,4 +1,4 @@
-namespace FpFilters.ObjectFilters.Tests
+namespace FpFilters.Tests
 {
     public class ObjectFiltersTests
     {
@@ -13,33 +13,33 @@ namespace FpFilters.ObjectFilters.Tests
         public void HasProp_ReturnsTrueForExistingProp()
         {
             var obj = new TestObj { Id = 1, Name = "Test", Flag = true };
-            Assert.True(ObjectFilters.HasProp(obj, "Id"));
-            Assert.True(ObjectFilters.HasProp(obj, "Name"));
-            Assert.False(ObjectFilters.HasProp(obj, "NonExistent"));
+            Assert.True(FpFilters.ObjectFilters.HasProp(obj, "Id"));
+            Assert.True(FpFilters.ObjectFilters.HasProp(obj, "Name"));
+            Assert.False(FpFilters.ObjectFilters.HasProp(obj, "NonExistent"));
         }
 
         [Fact]
         public void HasProp_ReturnsTrueForMatchingValue()
         {
             var obj = new TestObj { Id = 1, Name = "Test", Flag = true };
-            Assert.True(ObjectFilters.HasProp(obj, "Id", 1));
-            Assert.False(ObjectFilters.HasProp(obj, "Id", 2));
+            Assert.True(FpFilters.ObjectFilters.HasProp(obj, "Id", 1));
+            Assert.False(FpFilters.ObjectFilters.HasProp(obj, "Id", 2));
         }
 
         [Fact]
         public void HasProp_ReturnsTrueForPredicate()
         {
             var obj = new TestObj { Id = 1, Name = "Test", Flag = true };
-            Assert.True(ObjectFilters.HasProp(obj, "Id", (object v) => (int)v == 1));
-            Assert.False(ObjectFilters.HasProp(obj, "Id", (object v) => (int)v == 2));
+            Assert.True(FpFilters.ObjectFilters.HasProp(obj, "Id", (object v) => (int)v == 1));
+            Assert.False(FpFilters.ObjectFilters.HasProp(obj, "Id", (object v) => (int)v == 2));
         }
 
         [Fact]
         public void HasProps_ReturnsTrueForAllProps()
         {
             var obj = new TestObj { Id = 1, Name = "Test", Flag = true };
-            Assert.True(ObjectFilters.HasProps(obj, new[] { "Id", "Name" }, new object?[] { 1, "Test" }));
-            Assert.False(ObjectFilters.HasProps(obj, new[] { "Id", "Name" }, new object?[] { 2, "Test" }));
+            Assert.True(FpFilters.ObjectFilters.HasProps(obj, new[] { "Id", "Name" }, new object?[] { 1, "Test" }));
+            Assert.False(FpFilters.ObjectFilters.HasProps(obj, new[] { "Id", "Name" }, new object?[] { 2, "Test" }));
         }
 
         [Fact]
@@ -47,10 +47,10 @@ namespace FpFilters.ObjectFilters.Tests
         {
             var obj1 = new TestObj { Id = 1, Name = "Test" };
             var obj2 = new TestObj { Id = 1, Name = "Test" };
-            Assert.True(ObjectFilters.HasSameProp(obj1, obj2, "Id"));
-            Assert.True(ObjectFilters.HasSameProp(obj1, obj2, "Name"));
+            Assert.True(FpFilters.ObjectFilters.HasSameProp(obj1, obj2, "Id"));
+            Assert.True(FpFilters.ObjectFilters.HasSameProp(obj1, obj2, "Name"));
             obj2.Id = 2;
-            Assert.False(ObjectFilters.HasSameProp(obj1, obj2, "Id"));
+            Assert.False(FpFilters.ObjectFilters.HasSameProp(obj1, obj2, "Id"));
         }
 
         [Fact]
@@ -58,9 +58,9 @@ namespace FpFilters.ObjectFilters.Tests
         {
             var obj1 = new TestObj { Id = 1, Name = "Test" };
             var obj2 = new TestObj { Id = 1, Name = "Test" };
-            Assert.True(ObjectFilters.HasSameProps(obj1, obj2, new[] { "Id", "Name" }));
+            Assert.True(FpFilters.ObjectFilters.HasSameProps(obj1, obj2, new[] { "Id", "Name" }));
             obj2.Id = 2;
-            Assert.False(ObjectFilters.HasSameProps(obj1, obj2, new[] { "Id", "Name" }));
+            Assert.False(FpFilters.ObjectFilters.HasSameProps(obj1, obj2, new[] { "Id", "Name" }));
         }
 
         [Fact]
@@ -68,10 +68,10 @@ namespace FpFilters.ObjectFilters.Tests
         {
             var obj1 = new TestObj { Id = 1, Name = "Test" };
             var obj2 = new TestObj { Id = 2, Name = "Test2" };
-            Assert.True(ObjectFilters.HasNotProp(obj1, "Id", 2));
-            Assert.True(ObjectFilters.HasNotProps(obj1, new[] { "Id", "Name" }, new object?[] { 2, "Test2" }));
-            Assert.True(ObjectFilters.HasNotSameProp(obj1, obj2, "Id"));
-            Assert.True(ObjectFilters.HasNotSameProps(obj1, obj2, new[] { "Id", "Name" }));
+            Assert.True(FpFilters.ObjectFilters.HasNotProp(obj1, "Id", 2));
+            Assert.True(FpFilters.ObjectFilters.HasNotProps(obj1, new[] { "Id", "Name" }, new object?[] { 2, "Test2" }));
+            Assert.True(FpFilters.ObjectFilters.HasNotSameProp(obj1, obj2, "Id"));
+            Assert.True(FpFilters.ObjectFilters.HasNotSameProps(obj1, obj2, new[] { "Id", "Name" }));
         }
     }
 }

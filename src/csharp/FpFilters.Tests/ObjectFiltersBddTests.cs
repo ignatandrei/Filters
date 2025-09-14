@@ -1,4 +1,4 @@
-namespace FpFilters.ObjectFilters.BddTests
+namespace FpFilters.BddTests
 {
     [FeatureDescription("ObjectFilters: BDD scenarios for object filter functions.")]
     public class ObjectFiltersFeature : FeatureFixture
@@ -9,12 +9,12 @@ namespace FpFilters.ObjectFilters.BddTests
 
         private void GivenObject(object? value) => arg = value;
         private void GivenComparison(object value) => comparison = value;
-        private void WhenIsNull() => result = FpFilters.ObjectFilters.ObjectFilters.IsNull(arg);
-        private void WhenIsNotNull() => result = FpFilters.ObjectFilters.ObjectFilters.IsNotNull(arg);
-        private void WhenIsEqualTo() => result = FpFilters.ObjectFilters.ObjectFilters.IsEqualTo(arg, comparison);
-        private void WhenIsNotEqualTo() => result = FpFilters.ObjectFilters.ObjectFilters.IsNotEqualTo(arg, comparison);
-        private void WhenIsReferenceEqual() => result = FpFilters.ObjectFilters.ObjectFilters.IsReferenceEqual(arg, comparison);
-        private void WhenIsReferenceNotEqual() => result = FpFilters.ObjectFilters.ObjectFilters.IsReferenceNotEqual(arg, comparison);
+        private void WhenIsNull() => result = FpFilters.ObjectFilters.IsNull(arg);
+        private void WhenIsNotNull() => result = FpFilters.ObjectFilters.IsNotNull(arg);
+        private void WhenIsEqualTo() => result = FpFilters.ObjectFilters.IsEqualTo(arg, comparison);
+        private void WhenIsNotEqualTo() => result = FpFilters.ObjectFilters.IsNotEqualTo(arg, comparison);
+        private void WhenIsReferenceEqual() => result = FpFilters.ObjectFilters.IsReferenceEqual(arg, comparison);
+        private void WhenIsReferenceNotEqual() => result = FpFilters.ObjectFilters.IsReferenceNotEqual(arg, comparison);
         private void ThenResultShouldBeTrue() => Xunit.Assert.True(result);
         private void ThenResultShouldBeFalse() => Xunit.Assert.False(result);
 
@@ -110,11 +110,11 @@ namespace FpFilters.ObjectFilters.BddTests
         public void Should_check_HasProp_linq()
         {
             var obj = new { Name = "Test", Value = 42 };
-            var hasName = FpFilters.ObjectFilters.ObjectFilters.HasProp("Name");
+            var hasName = FpFilters.ObjectFilters.HasProp("Name");
             Xunit.Assert.True(hasName(obj));
-            var hasValue42 = FpFilters.ObjectFilters.ObjectFilters.HasProp("Value", 42);
+            var hasValue42 = FpFilters.ObjectFilters.HasProp("Value", 42);
             Xunit.Assert.True(hasValue42(obj));
-            var hasValue43 = FpFilters.ObjectFilters.ObjectFilters.HasProp("Value", 43);
+            var hasValue43 = FpFilters.ObjectFilters.HasProp("Value", 43);
             Xunit.Assert.False(hasValue43(obj));
         }
 
@@ -122,11 +122,11 @@ namespace FpFilters.ObjectFilters.BddTests
         public void Should_check_HasProps_linq()
         {
             var obj = new { Name = "Test", Value = 42 };
-            var hasBoth = FpFilters.ObjectFilters.ObjectFilters.HasProps(new[] { "Name", "Value" });
+            var hasBoth = FpFilters.ObjectFilters.HasProps(new[] { "Name", "Value" });
             Xunit.Assert.True(hasBoth(obj));
-            var hasBothWithValues = FpFilters.ObjectFilters.ObjectFilters.HasProps(new[] { "Name", "Value" }, new object?[] { "Test", 42 });
+            var hasBothWithValues = FpFilters.ObjectFilters.HasProps(new[] { "Name", "Value" }, new object?[] { "Test", 42 });
             Xunit.Assert.True(hasBothWithValues(obj));
-            var hasBothWithWrongValues = FpFilters.ObjectFilters.ObjectFilters.HasProps(new[] { "Name", "Value" }, new object?[] { "Test", 43 });
+            var hasBothWithWrongValues = FpFilters.ObjectFilters.HasProps(new[] { "Name", "Value" }, new object?[] { "Test", 43 });
             Xunit.Assert.False(hasBothWithWrongValues(obj));
         }
 
@@ -136,7 +136,7 @@ namespace FpFilters.ObjectFilters.BddTests
             var obj1 = new { Name = "Test" };
             var obj2 = new { Name = "Test" };
             var obj3 = new { Name = "Other" };
-            var hasSameName = FpFilters.ObjectFilters.ObjectFilters.HasSameProp(obj2, "Name");
+            var hasSameName = FpFilters.ObjectFilters.HasSameProp(obj2, "Name");
             Xunit.Assert.True(hasSameName(obj1));
             Xunit.Assert.False(hasSameName(obj3));
         }
@@ -147,7 +147,7 @@ namespace FpFilters.ObjectFilters.BddTests
             var obj1 = new { Name = "Test", Value = 42 };
             var obj2 = new { Name = "Test", Value = 42 };
             var obj3 = new { Name = "Test", Value = 43 };
-            var hasSameBoth = FpFilters.ObjectFilters.ObjectFilters.HasSameProps(obj2, new[] { "Name", "Value" });
+            var hasSameBoth = FpFilters.ObjectFilters.HasSameProps(obj2, new[] { "Name", "Value" });
             Xunit.Assert.True(hasSameBoth(obj1));
             Xunit.Assert.False(hasSameBoth(obj3));
         }
@@ -156,9 +156,9 @@ namespace FpFilters.ObjectFilters.BddTests
         public void Should_check_HasNotProp_linq()
         {
             var obj = new { Name = "Test", Value = 42 };
-            var hasNotName = FpFilters.ObjectFilters.ObjectFilters.HasNotProp("Name");
+            var hasNotName = FpFilters.ObjectFilters.HasNotProp("Name");
             Xunit.Assert.False(hasNotName(obj));
-            var hasNotValue43 = FpFilters.ObjectFilters.ObjectFilters.HasNotProp("Value", 43);
+            var hasNotValue43 = FpFilters.ObjectFilters.HasNotProp("Value", 43);
             Xunit.Assert.True(hasNotValue43(obj));
         }
 
@@ -166,9 +166,9 @@ namespace FpFilters.ObjectFilters.BddTests
         public void Should_check_HasNotProps_linq()
         {
             var obj = new { Name = "Test", Value = 42 };
-            var hasNotBoth = FpFilters.ObjectFilters.ObjectFilters.HasNotProps(new[] { "Name", "Value" });
+            var hasNotBoth = FpFilters.ObjectFilters.HasNotProps(new[] { "Name", "Value" });
             Xunit.Assert.False(hasNotBoth(obj));
-            var hasNotBothWithWrongValues = FpFilters.ObjectFilters.ObjectFilters.HasNotProps(new[] { "Name", "Value" }, new object?[] { "Test", 43 });
+            var hasNotBothWithWrongValues = FpFilters.ObjectFilters.HasNotProps(new[] { "Name", "Value" }, new object?[] { "Test", 43 });
             Xunit.Assert.True(hasNotBothWithWrongValues(obj));
         }
 
@@ -178,7 +178,7 @@ namespace FpFilters.ObjectFilters.BddTests
             var obj1 = new { Name = "Test" };
             var obj2 = new { Name = "Test" };
             var obj3 = new { Name = "Other" };
-            var hasNotSameName = FpFilters.ObjectFilters.ObjectFilters.HasNotSameProp(obj2, "Name");
+            var hasNotSameName = FpFilters.ObjectFilters.HasNotSameProp(obj2, "Name");
             Xunit.Assert.False(hasNotSameName(obj1));
             Xunit.Assert.True(hasNotSameName(obj3));
         }
@@ -189,7 +189,7 @@ namespace FpFilters.ObjectFilters.BddTests
             var obj1 = new { Name = "Test", Value = 42 };
             var obj2 = new { Name = "Test", Value = 42 };
             var obj3 = new { Name = "Test", Value = 43 };
-            var hasNotSameBoth = FpFilters.ObjectFilters.ObjectFilters.HasNotSameProps(obj2, new[] { "Name", "Value" });
+            var hasNotSameBoth = FpFilters.ObjectFilters.HasNotSameProps(obj2, new[] { "Name", "Value" });
             Xunit.Assert.False(hasNotSameBoth(obj1));
             Xunit.Assert.True(hasNotSameBoth(obj3));
         }
@@ -197,10 +197,10 @@ namespace FpFilters.ObjectFilters.BddTests
         [Scenario]
         public void Should_check_IsEqualTo_linq()
         {
-            var is42 = FpFilters.ObjectFilters.ObjectFilters.IsEqualTo(42);
+            var is42 = FpFilters.ObjectFilters.IsEqualTo(42);
             Xunit.Assert.True(is42(42));
             Xunit.Assert.False(is42(43));
-            var isStr = FpFilters.ObjectFilters.ObjectFilters.IsEqualTo("abc");
+            var isStr = FpFilters.ObjectFilters.IsEqualTo("abc");
             Xunit.Assert.True(isStr("abc"));
             Xunit.Assert.False(isStr("def"));
         }
@@ -208,10 +208,10 @@ namespace FpFilters.ObjectFilters.BddTests
         [Scenario]
         public void Should_check_IsNotEqualTo_linq()
         {
-            var isNot42 = FpFilters.ObjectFilters.ObjectFilters.IsNotEqualTo(42);
+            var isNot42 = FpFilters.ObjectFilters.IsNotEqualTo(42);
             Xunit.Assert.True(isNot42(43));
             Xunit.Assert.False(isNot42(42));
-            var isNotStr = FpFilters.ObjectFilters.ObjectFilters.IsNotEqualTo("abc");
+            var isNotStr = FpFilters.ObjectFilters.IsNotEqualTo("abc");
             Xunit.Assert.True(isNotStr("def"));
             Xunit.Assert.False(isNotStr("abc"));
         }
@@ -220,7 +220,7 @@ namespace FpFilters.ObjectFilters.BddTests
         public void Should_check_IsReferenceEqual_linq()
         {
             var obj = new object();
-            var isRefEq = FpFilters.ObjectFilters.ObjectFilters.IsReferenceEqual(obj);
+            var isRefEq = FpFilters.ObjectFilters.IsReferenceEqual(obj);
             Xunit.Assert.True(isRefEq(obj));
             Xunit.Assert.False(isRefEq(new object()));
         }
@@ -229,7 +229,7 @@ namespace FpFilters.ObjectFilters.BddTests
         public void Should_check_IsReferenceNotEqual_linq()
         {
             var obj = new object();
-            var isRefNotEq = FpFilters.ObjectFilters.ObjectFilters.IsReferenceNotEqual(obj);
+            var isRefNotEq = FpFilters.ObjectFilters.IsReferenceNotEqual(obj);
             Xunit.Assert.False(isRefNotEq(obj));
             Xunit.Assert.True(isRefNotEq(new object()));
         }
