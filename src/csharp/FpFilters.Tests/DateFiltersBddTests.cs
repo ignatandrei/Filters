@@ -1,4 +1,4 @@
-namespace FpFilters.DateFilters.BddTests
+namespace FpFilters.BddTests
 {
     [FeatureDescription("DateFilters: BDD scenarios for date filter functions.")]
     public class DateFiltersFeature : FeatureFixture
@@ -10,12 +10,12 @@ namespace FpFilters.DateFilters.BddTests
 
         private void GivenDate(DateTime value) => arg = value;
         private void GivenComparison(DateTime value) => comparison = value;
-        private void WhenIsFutureDate() => result = FpFilters.DateFilters.DateFilters.IsFutureDate(arg, comparison);
-        private void WhenIsPastDate() => result = FpFilters.DateFilters.DateFilters.IsPastDate(arg, comparison);
-        private void WhenIsSameDate() => result = FpFilters.DateFilters.DateFilters.IsSameDate(arg, comparison);
-        private void WhenIsLeapYear() => result = FpFilters.DateFilters.DateFilters.IsLeapYear(arg);
-        private void WhenIsMonday() => result = FpFilters.DateFilters.DateFilters.IsMonday(arg);
-        private void WhenIsFriday() => result = FpFilters.DateFilters.DateFilters.IsFriday(arg);
+        private void WhenIsFutureDate() => result = FpFilters.DateFilters.IsFutureDate(arg, comparison);
+        private void WhenIsPastDate() => result = FpFilters.DateFilters.IsPastDate(arg, comparison);
+        private void WhenIsSameDate() => result = FpFilters.DateFilters.IsSameDate(arg, comparison);
+        private void WhenIsLeapYear() => result = FpFilters.DateFilters.IsLeapYear(arg);
+        private void WhenIsMonday() => result = FpFilters.DateFilters.IsMonday(arg);
+        private void WhenIsFriday() => result = FpFilters.DateFilters.IsFriday(arg);
         private void ThenResultShouldBeTrue() => Xunit.Assert.True(result);
         private void ThenResultShouldBeFalse() => Xunit.Assert.False(result);
 
@@ -42,7 +42,7 @@ namespace FpFilters.DateFilters.BddTests
         {
             var comparisonDate = DateTime.Now;
             Runner.RunScenario(
-                _ => GivenLinqFilter(FpFilters.DateFilters.DateFilters.IsFutureDate(comparisonDate)),
+                _ => GivenLinqFilter(FpFilters.DateFilters.IsFutureDate(comparisonDate)),
                 _ => GivenDate(comparisonDate.AddDays(1)),
                 _ => WhenApplyLinqFilter(),
                 _ => ThenResultShouldBeTrue(),
@@ -72,7 +72,7 @@ namespace FpFilters.DateFilters.BddTests
         {
             var comparisonDate = DateTime.Now;
             Runner.RunScenario(
-                _ => GivenLinqFilter(FpFilters.DateFilters.DateFilters.IsPastDate(comparisonDate)),
+                _ => GivenLinqFilter(FpFilters.DateFilters.IsPastDate(comparisonDate)),
                 _ => GivenDate(comparisonDate.AddDays(-1)),
                 _ => WhenApplyLinqFilter(),
                 _ => ThenResultShouldBeTrue(),
@@ -103,7 +103,7 @@ namespace FpFilters.DateFilters.BddTests
         {
             var now = DateTime.Now;
             Runner.RunScenario(
-                _ => GivenLinqFilter(FpFilters.DateFilters.DateFilters.IsSameDate(now)),
+                _ => GivenLinqFilter(FpFilters.DateFilters.IsSameDate(now)),
                 _ => GivenDate(now),
                 _ => WhenApplyLinqFilter(),
                 _ => ThenResultShouldBeTrue(),
@@ -118,7 +118,7 @@ namespace FpFilters.DateFilters.BddTests
         {
             var now = DateTime.Now;
             Runner.RunScenario(
-                _ => GivenLinqFilter(FpFilters.DateFilters.DateFilters.IsSameDay(now)),
+                _ => GivenLinqFilter(FpFilters.DateFilters.IsSameDay(now)),
                 _ => GivenDate(now),
                 _ => WhenApplyLinqFilter(),
                 _ => ThenResultShouldBeTrue(),
@@ -136,7 +136,7 @@ namespace FpFilters.DateFilters.BddTests
         {
             var now = DateTime.Now;
             Runner.RunScenario(
-                _ => GivenLinqFilter(FpFilters.DateFilters.DateFilters.IsSameMonth(now)),
+                _ => GivenLinqFilter(FpFilters.DateFilters.IsSameMonth(now)),
                 _ => GivenDate(now),
                 _ => WhenApplyLinqFilter(),
                 _ => ThenResultShouldBeTrue(),
@@ -151,7 +151,7 @@ namespace FpFilters.DateFilters.BddTests
         {
             var now = DateTime.Now;
             Runner.RunScenario(
-                _ => GivenLinqFilter(FpFilters.DateFilters.DateFilters.IsSameYear(now)),
+                _ => GivenLinqFilter(FpFilters.DateFilters.IsSameYear(now)),
                 _ => GivenDate(now),
                 _ => WhenApplyLinqFilter(),
                 _ => ThenResultShouldBeTrue(),

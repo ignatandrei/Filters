@@ -1,4 +1,4 @@
-namespace FpFilters.DateFilters
+namespace FpFilters
 {
     public static class DateFilters
     {
