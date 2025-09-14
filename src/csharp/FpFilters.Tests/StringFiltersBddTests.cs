@@ -1,4 +1,4 @@
-namespace FpFilters.StringFilters.BddTests
+namespace FpFilters.BddTests
 {
     [FeatureDescription("StringFilters: BDD scenarios for string filter functions.")]
     public class StringFiltersFeature : FeatureFixture
@@ -9,20 +9,20 @@ namespace FpFilters.StringFilters.BddTests
 
         private void GivenString(string value) => arg = value;
         private void GivenComparison(string value) => comparison = value;
-        private void WhenStartsWith() => result = FpFilters.StringFilters.StringFilters.StartsWith(arg, comparison!);
-        private void WhenEndsWith() => result = FpFilters.StringFilters.StringFilters.EndsWith(arg, comparison!);
-        private void WhenIncludes() => result = FpFilters.StringFilters.StringFilters.Includes(arg, comparison!);
-        private void WhenIsEmptyString() => result = FpFilters.StringFilters.StringFilters.IsEmptyString(arg);
-        private void WhenIsEmptyStringTrim() => result = FpFilters.StringFilters.StringFilters.IsEmptyStringTrim(arg);
-        private void WhenIsLowerCase() => result = FpFilters.StringFilters.StringFilters.IsLowerCase(arg);
-        private void WhenIsUpperCase() => result = FpFilters.StringFilters.StringFilters.IsUpperCase(arg);
-        private void WhenIsMixedCase() => result = FpFilters.StringFilters.StringFilters.IsMixedCase(arg);
-        private void WhenIsUniformCase() => result = FpFilters.StringFilters.StringFilters.IsUniformCase(arg);
-        private void WhenIsTrimmable() => result = FpFilters.StringFilters.StringFilters.IsTrimmable(arg);
-        private void WhenIsPalindrome() => result = FpFilters.StringFilters.StringFilters.IsPalindrome(arg);
-        private void WhenMatches(string pattern) => result = FpFilters.StringFilters.StringFilters.Matches(arg, pattern);
-        private void WhenDoesNotMatch(string pattern) => result = FpFilters.StringFilters.StringFilters.DoesNotMatch(arg, pattern);
-        private void WhenIsEmail() => result = FpFilters.StringFilters.StringFilters.IsEmail(arg);
+        private void WhenStartsWith() => result = FpFilters.StringFilters.StartsWith(arg, comparison!);
+        private void WhenEndsWith() => result = FpFilters.StringFilters.EndsWith(arg, comparison!);
+        private void WhenIncludes() => result = FpFilters.StringFilters.Includes(arg, comparison!);
+        private void WhenIsEmptyString() => result = FpFilters.StringFilters.IsEmptyString(arg);
+        private void WhenIsEmptyStringTrim() => result = FpFilters.StringFilters.IsEmptyStringTrim(arg);
+        private void WhenIsLowerCase() => result = FpFilters.StringFilters.IsLowerCase(arg);
+        private void WhenIsUpperCase() => result = FpFilters.StringFilters.IsUpperCase(arg);
+        private void WhenIsMixedCase() => result = FpFilters.StringFilters.IsMixedCase(arg);
+        private void WhenIsUniformCase() => result = FpFilters.StringFilters.IsUniformCase(arg);
+        private void WhenIsTrimmable() => result = FpFilters.StringFilters.IsTrimmable(arg);
+        private void WhenIsPalindrome() => result = FpFilters.StringFilters.IsPalindrome(arg);
+        private void WhenMatches(string pattern) => result = FpFilters.StringFilters.Matches(arg, pattern);
+        private void WhenDoesNotMatch(string pattern) => result = FpFilters.StringFilters.DoesNotMatch(arg, pattern);
+        private void WhenIsEmail() => result = FpFilters.StringFilters.IsEmail(arg);
         private void ThenResultShouldBeTrue() => Xunit.Assert.True(result);
         private void ThenResultShouldBeFalse() => Xunit.Assert.False(result);
 
@@ -217,11 +217,11 @@ namespace FpFilters.StringFilters.BddTests
             );
         }
 
-        private void WhenStartsWithLinq(string substring) => result = FpFilters.StringFilters.StringFilters.StartsWith(substring)(arg);
-        private void WhenEndsWithLinq(string substring) => result = FpFilters.StringFilters.StringFilters.EndsWith(substring)(arg);
-        private void WhenIncludesLinq(string substring) => result = FpFilters.StringFilters.StringFilters.Includes(substring)(arg);
-        private void WhenMatchesLinq(string pattern, string value) => result = FpFilters.StringFilters.StringFilters.Matches(pattern)(value);
-        private void WhenDoesNotMatchLinq(string pattern, string value) => result = FpFilters.StringFilters.StringFilters.DoesNotMatch(pattern)(value);
+        private void WhenStartsWithLinq(string substring) => result = FpFilters.StringFilters.StartsWith(substring)(arg);
+        private void WhenEndsWithLinq(string substring) => result = FpFilters.StringFilters.EndsWith(substring)(arg);
+        private void WhenIncludesLinq(string substring) => result = FpFilters.StringFilters.Includes(substring)(arg);
+        private void WhenMatchesLinq(string pattern, string value) => result = FpFilters.StringFilters.Matches(pattern)(value);
+        private void WhenDoesNotMatchLinq(string pattern, string value) => result = FpFilters.StringFilters.DoesNotMatch(pattern)(value);
 
         [Scenario]
         public void Should_support_linq_overloads_for_two_arg_functions()
@@ -241,12 +241,12 @@ namespace FpFilters.StringFilters.BddTests
             );
         }
 
-        private void WhenStartsWithComparison(string substring, StringComparison comparisonType) => result = FpFilters.StringFilters.StringFilters.StartsWith(arg, substring, comparisonType);
-        private void WhenStartsWithLinqComparison(string substring, StringComparison comparisonType) => result = FpFilters.StringFilters.StringFilters.StartsWith(substring, comparisonType)(arg);
-        private void WhenEndsWithComparison(string substring, StringComparison comparisonType) => result = FpFilters.StringFilters.StringFilters.EndsWith(arg, substring, comparisonType);
-        private void WhenEndsWithLinqComparison(string substring, StringComparison comparisonType) => result = FpFilters.StringFilters.StringFilters.EndsWith(substring, comparisonType)(arg);
-        private void WhenIncludesComparison(string substring, StringComparison comparisonType) => result = FpFilters.StringFilters.StringFilters.Includes(arg, substring, comparisonType);
-        private void WhenIncludesLinqComparison(string substring, StringComparison comparisonType) => result = FpFilters.StringFilters.StringFilters.Includes(substring, comparisonType)(arg);
+        private void WhenStartsWithComparison(string substring, StringComparison comparisonType) => result = FpFilters.StringFilters.StartsWith(arg, substring, comparisonType);
+        private void WhenStartsWithLinqComparison(string substring, StringComparison comparisonType) => result = FpFilters.StringFilters.StartsWith(substring, comparisonType)(arg);
+        private void WhenEndsWithComparison(string substring, StringComparison comparisonType) => result = FpFilters.StringFilters.EndsWith(arg, substring, comparisonType);
+        private void WhenEndsWithLinqComparison(string substring, StringComparison comparisonType) => result = FpFilters.StringFilters.EndsWith(substring, comparisonType)(arg);
+        private void WhenIncludesComparison(string substring, StringComparison comparisonType) => result = FpFilters.StringFilters.Includes(arg, substring, comparisonType);
+        private void WhenIncludesLinqComparison(string substring, StringComparison comparisonType) => result = FpFilters.StringFilters.Includes(substring, comparisonType)(arg);
 
         [Scenario]
         public void Should_check_startswith_and_endswith_with_stringcomparison()

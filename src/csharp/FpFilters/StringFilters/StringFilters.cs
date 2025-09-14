@@ -1,4 +1,4 @@
-namespace FpFilters.StringFilters
+namespace FpFilters
 {
     public static class StringFilters
     {
